@@ -26,7 +26,9 @@ print(CreateDimen(yVector,newgrades,steps))
 print("\n \n")
 print("Z=>\n")
 print(CreateDimen(zVector,newgrades,steps))
-   
+print("\n \n")
+print("t=>\n")
+print(CreateDimen(tVector,newgrades,steps))
 
 
 
