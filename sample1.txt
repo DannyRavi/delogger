@@ -1,0 +1,23 @@
+
+grades = []
+with open('readlog.txt',"r") as f:
+    variable=f.readlines()
+#--------------------
+for i in range(len(variable)):
+    grades.append(variable[i].rstrip('\n').split(','))
+print(grades)
+
+# for i in range(len(variable)):
+#     grades.append(variable[i].strip('\n'))
+# for i in range(len(variable)):
+#     grades.append(variable[i].split(","))
+==========================
+
+z=[]    
+z=variable
+print(z[15])
+vv=np.array(z).tolist()
+npa = np.asarray(z)
+print(vv)
+
+==================================
