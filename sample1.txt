@@ -21,3 +21,12 @@ npa = np.asarray(z)
 print(vv)
 
 ==================================
+
+
+# for x in range(1,len(newgrades),4):
+    
+#     demX.append(newgrades[x])
+#     # print(newgrades[x]) 
+# print(demX) 
+
+==================================
