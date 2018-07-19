@@ -11,7 +11,11 @@ Tdim=[]
 results=[]
 eliminate_Item='22222'
 plt.close()
-with open('ForwardStop.txt',"r") as f:
+
+
+# filename = os.path.join(fileDir, 'Folder1.1/same.txt')
+# readFile(filename)
+with open('1249.txt',"r") as f:
     variable=f.readlines()
 #--------------------
 
