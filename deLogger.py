@@ -14,7 +14,7 @@ plt.close()
 
 
 
-with open('970428/1256.txt',"r") as f:
+with open('970428/1258.txt',"r") as f:
     variable=f.readlines()
 #--------------------
 
