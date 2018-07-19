@@ -13,9 +13,8 @@ eliminate_Item='22222'
 plt.close()
 
 
-# filename = os.path.join(fileDir, 'Folder1.1/same.txt')
-# readFile(filename)
-with open('1249.txt',"r") as f:
+
+with open('970428/1256.txt',"r") as f:
     variable=f.readlines()
 #--------------------
 
