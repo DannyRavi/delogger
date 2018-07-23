@@ -9,12 +9,12 @@ Ydim=[]
 Zdim=[]
 Tdim=[]
 results=[]
-eliminate_Item='22222'
+eliminate_Item='22222'   #'-5'#22222
 plt.close()
 
 
 
-with open('970428/1258.txt',"r") as f:
+with open('970431/648.txt',"r") as f:
     variable=f.readlines()
 #--------------------
 
