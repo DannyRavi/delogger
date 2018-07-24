@@ -14,7 +14,7 @@ plt.close()
 
 
 
-with open('970431/648.txt',"r") as f:
+with open('970431/705.txt',"r") as f:
     variable=f.readlines()
 #--------------------
 
@@ -28,6 +28,7 @@ TokenDim=CreateDimen(Tokens,newgrades,steps)
 Xdim=CreateDimen(xVector,newgrades,steps)
 Ydim=CreateDimen(yVector,newgrades,steps)
 Zdim=CreateDimen(zVector,newgrades,steps)
+Irdim=CreateDimen(IrVector,newgrades,steps)
 Tdim=CreateDimen(tVector,newgrades,steps)
 
 
@@ -37,12 +38,13 @@ CreateFile(Xdim,Ydim,Zdim,Tdim)
 Xdim = list(map(int, Xdim))
 Ydim = list(map(int, Ydim))
 Zdim = list(map(int, Zdim))
+Irdim= list(map(int, Irdim))
 
 
 Xdim = np.abs(Xdim)
 Ydim = np.abs(Ydim)
 Zdim = np.abs(Zdim)
-
+Irdim= np.abs(Irdim)
 
 # print("allItem=>\n")
 # print(newgrades)
@@ -66,21 +68,27 @@ print(CreateDimen(tVector,newgrades,steps))
 
 plt.figure(1)
 
-plt.subplot(311)
+plt.subplot(411)
 plt.plot(Xdim)
 plt.title('X Dimen')
 plt.grid(True)
 
-plt.subplot(312)
+plt.subplot(412)
 plt.plot(Ydim)
 plt.ylabel('Amp')
 plt.title('Y Dimen')
 plt.grid(True)
 
-plt.subplot(313)
+plt.subplot(413)
 plt.plot(Zdim)
-plt.xlabel('Index')
+plt.xlabel('Amp')
 plt.title('Z Dimen')
+plt.grid(True)
+
+plt.subplot(414)
+plt.plot(Irdim)
+plt.xlabel('Amp')
+plt.title('IR Dimen')
 plt.grid(True)
 
 plt.show()
