@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from  dimes import *
+from numpy import *
 
 grades = []
 TokenDim=[]
@@ -68,31 +69,32 @@ print(CreateDimen(tVector,newgrades,steps))
 
 plt.figure(1)
 
-plt.subplot(411)
-plt.plot(Xdim)
-plt.title('X Dimen')
-plt.grid(True)
+# plt.subplot(411)
+plt.plot(np.diff(Xdim))
+# plt.title('X Dimen')
+# plt.grid(True)
 
-plt.subplot(412)
-plt.plot(Ydim)
-plt.ylabel('Amp')
-plt.title('Y Dimen')
-plt.grid(True)
+# plt.subplot(412)
+# plt.plot(Ydim)
+# plt.ylabel('Amp')
+# plt.title('Y Dimen')
+# plt.grid(True)
 
-plt.subplot(413)
-plt.plot(Zdim)
-plt.xlabel('Amp')
-plt.title('Z Dimen')
-plt.grid(True)
+# plt.subplot(413)
+# plt.plot(Zdim)
+# plt.xlabel('Amp')
+# plt.title('Z Dimen')
+# plt.grid(True)
 
-plt.subplot(414)
-plt.plot(Irdim)
-plt.xlabel('Amp')
-plt.title('IR Dimen')
-plt.grid(True)
+# plt.subplot(414)
+# plt.plot(Irdim)
+# plt.xlabel('Amp')
+# plt.title('IR Dimen')
+# plt.grid(True)
 
+# plt.show()
+# plt.close()
+
+
+plt.ylabel('some numbers')
 plt.show()
-plt.close()
-
-
-    
