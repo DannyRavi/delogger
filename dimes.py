@@ -31,3 +31,13 @@ def CreateFile(X,Y,Z,T):
     f.write(str(T))
     f.write("\r\n")
     f.close() 
+
+def Integ(x):
+    z=[]
+    sum1=0
+    for i in range(len(x)):
+        sum1 +=x[i]
+        z.append(sum1)
+
+    return z
+
