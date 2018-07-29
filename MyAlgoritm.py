@@ -6,6 +6,7 @@ from scipy import signal
 from scipy.signal import lfilter, lfilter_zi, filtfilt, butter
 from numpy import linalg as LA
 from  dimes import *
+from  Filtering import *
 from  ANNC import *
 
 
@@ -79,31 +80,24 @@ def PrintDataDiscreate():
 
 # PrintDataDiscreate()
 
+FilterIDXdim=filtering(4,0.1,IDXdim).outy
+FilterIDYdim=filtering(4,0.1,IDYdim).outy
+FilterIDZdim=filtering(4,0.1,IDZdim).outy
 
 
-def filters():
-    b, a = butter(4, 0.1,analog=False)
 
-    # Apply the filter to xn.  Use lfilter_zi to choose the initial condition
-    # of the filter.
-    zi = lfilter_zi(b, a)
-    z, _ = lfilter(b, a, IDXdim, zi=zi*IDXdim[0])
-
-    # Apply the filter again, to have a result filtered at an order
-    # the same as filtfilt.
-    z2, _ = lfilter(b, a, z, zi=zi*z[0])
-
-    # Use filtfilt to apply the filter.
-    yy = filtfilt(b, a, IDXdim)
-
-    yy=abs(yy)
-    return yy
 
 p = Perceptron(3, np.array([0.02, 0.02,0.02]))
+
 # for absolute
-absIDXdim=np.abs(IDXdim)
-absIDYdim=np.abs(IDYdim)
-absIDZdim=np.abs(IDZdim)
+# absIDXdim=np.abs(IDXdim)
+# absIDYdim=np.abs(IDYdim)
+# absIDZdim=np.abs(IDZdim)
+
+# for filter absolut
+absIDXdim=np.abs(FilterIDXdim)
+absIDYdim=np.abs(FilterIDYdim)
+absIDZdim=np.abs(FilterIDZdim)
 # for convert list to array
 ArrayabsIDXdim=np.vstack(absIDXdim)
 ArrayabsIDYdim=np.vstack(absIDYdim)
@@ -112,7 +106,8 @@ ArrayabsIDZdim=np.vstack(absIDZdim)
 
 
 
-def AnnExecute(r):
+
+def Ann_Execute(r):
     p=r
     xxm=[]
     OutY=[]
@@ -125,7 +120,7 @@ def AnnExecute(r):
 
 
 
-AnnExecute(p)
+Ann_Execute(p)
 
 
 def ShowMyAlgortim():
@@ -190,9 +185,9 @@ def ShowMyAlgortim():
 
     plt.figure(4)
     plt.subplot(311)
-    plt.plot(filters(), 'g-', linewidth=2, label='filtered data')
+    plt.plot(FilterIDXdim, 'g-', linewidth=2, label='filtered data')
     plt.subplot(312)
-    plt.plot(AnnExecute(p))
+    plt.plot(Ann_Execute(p))
     plt.title('ANN output')
     plt.subplot(313)
     plt.plot(np.abs(Xdim))
@@ -200,6 +195,19 @@ def ShowMyAlgortim():
     plt.xlabel('X')
 
 
+    plt.figure(5)
+    plt.subplot(311)
+    plt.plot(ArrayabsIDXdim, 'g-', linewidth=2, label='filtered data')
+    plt.title('X filtered')
+    plt.subplot(312)
+    plt.plot(ArrayabsIDYdim, 'g-', linewidth=2, label='filtered data')
+    plt.title('Y filtered')
+    plt.subplot(313)
+    plt.plot(ArrayabsIDZdim, 'g-', linewidth=2, label='filtered data')
+    plt.title('Z filtered')
+   
+
+   
 
     plt.show()
     plt.close('all')
