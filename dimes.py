@@ -5,13 +5,30 @@ zVector=3
 IrVector=4
 tVector=5
 steps=6
+steps2=5
 
 
+# relay
+grades = []
+TokenDim=[]
+Xdim=[]
+Ydim=[]
+Zdim=[]
+Tdim=[]
+Angpi=[]
+distance=[]
+results=[]
 
 
 def CreateDimen(Vector,dataInput,Steps):
     dem=[]
     for x in range(Vector,len(dataInput),Steps):
+        dem.append(dataInput[x])
+    return dem 
+
+def CreateDimen1(Vector,dataInput,Steps2):
+    dem=[]
+    for x in range(Vector,len(dataInput),Steps2):
         dem.append(dataInput[x])
     return dem 
 
@@ -40,4 +57,8 @@ def Integ(x):
         z.append(sum1)
 
     return z
+
+
+
+
 

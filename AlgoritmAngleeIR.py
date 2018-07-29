@@ -4,7 +4,6 @@ from  dimes import *
 from numpy import *
 from scipy import integrate
 from numpy import linalg as LA
-from scipy.signal import lfilter, lfilter_zi, filtfilt, butter
 
 grades = []
 TokenDim=[]
@@ -15,13 +14,13 @@ Tdim=[]
 Angpi=[]
 distance=[]
 results=[]
-
+ranges=70
 eliminate_Item='22222'   #'-5'#22222
 plt.close('all')
 
 
 
-with open('970428/1253.txt',"r") as f:
+with open('970431/658.txt',"r") as f:
     variable=f.readlines()
 #--------------------
 
@@ -31,13 +30,13 @@ for i in range(len(variable)):
 
 
 newgrades = list(filter(lambda x : x != eliminate_Item, grades))
-TokenDim=CreateDimen(Tokens,newgrades,steps2)
-Xdim=CreateDimen1(xVector,newgrades,steps2)
-Ydim=CreateDimen1(yVector,newgrades,steps2)
-Zdim=CreateDimen1(zVector,newgrades,steps2)
-# Irdim=CreateDimen(IrVector,newgrades,steps2)
-# Tdim=CreateDimen(tVector,newgrades,steps)
-ranges=len(Xdim)-10
+TokenDim=CreateDimen(Tokens,newgrades,steps)
+Xdim=CreateDimen(xVector,newgrades,steps)
+Ydim=CreateDimen(yVector,newgrades,steps)
+Zdim=CreateDimen(zVector,newgrades,steps)
+Irdim=CreateDimen(IrVector,newgrades,steps2)
+Tdim=CreateDimen(tVector,newgrades,steps)
+
 
 CreateFile(Xdim,Ydim,Zdim,Tdim)
 
@@ -45,13 +44,13 @@ CreateFile(Xdim,Ydim,Zdim,Tdim)
 Xdim = list(map(int, Xdim))
 Ydim = list(map(int, Ydim))
 Zdim = list(map(int, Zdim))
-# Irdim= list(map(int, Irdim))
+Irdim= list(map(int, Irdim))
 
 #Create real data
 Xdim = np.abs(Xdim)
 Ydim = np.abs(Ydim)
 Zdim = np.abs(Zdim)
-# Irdim= np.abs(Irdim)
+Irdim= np.abs(Irdim)
 
 #deraivate of real data
 DXdim = np.diff(Xdim)
@@ -66,12 +65,12 @@ IDZdim = Integ(DZdim)
 # print("allItem=>\n")
 # print(newgrades)
 # print("\n \n")
-print("token=>\n")
-print(CreateDimen1(Tokens,newgrades,steps2))
-print("\n \n")
-print("X=>\n")
-print(CreateDimen1(xVector,newgrades,steps2))
-print("\n \n")
+# print("token=>\n")
+# print(CreateDimen(Tokens,newgrades,steps))
+# print("\n \n")
+# print("X=>\n")
+# print(CreateDimen(xVector,newgrades,steps))
+# print("\n \n")
 # print("Y=>\n")
 # print(CreateDimen(yVector,newgrades,steps))
 # print("\n \n")
@@ -100,7 +99,7 @@ def Distance():
     dem=[]
     for i in range(ranges):
         # Angpi=IDXdim[i]**2
-        # Angpi=LA.norm(IDXdim[i])
+        # Angpi=LA.norm(Xdim[i])
         Angpi=LA.norm([IDXdim[i],IDYdim[i],IDZdim[i]])
 
         # Angpi=LA.norm([IDXdim[i],IDZdim[i]])
@@ -113,19 +112,7 @@ Angpi=AngpiCa()
 distance=Distance()
 # Angpi=LA.norm([3,4])
 
-b, a = butter(4, 0.1,analog=False)
 
-# Apply the filter to xn.  Use lfilter_zi to choose the initial condition
-# of the filter.
-zi = lfilter_zi(b, a)
-z, _ = lfilter(b, a, distance, zi=zi*distance[0])
-
-# Apply the filter again, to have a result filtered at an order
-# the same as filtfilt.
-z2, _ = lfilter(b, a, z, zi=zi*z[0])
-
-# Use filtfilt to apply the filter.
-y = filtfilt(b, a, distance)
 
 
 
@@ -212,25 +199,15 @@ plt.xlabel('Z')
 
 plt.figure(4)
 
-plt.subplot(211)
+plt.subplot(411)
 plt.plot(Angpi)
 plt.title('AAngle')
 
-plt.subplot(212)
+plt.subplot(412)
 plt.plot(distance)
 plt.title('distance')
 
-plt.figure(5)
 
-plt.subplot(211)
-y=abs(y)
-plt.plot( y, 'g-', linewidth=2, label='filtered data')
-plt.title('filtered norm abs')
-
-plt.subplot(212)
-plt.plot(np.abs(distance))
-plt.title('Norm abs')
-plt.xlabel('X')
 
 
 plt.show()
