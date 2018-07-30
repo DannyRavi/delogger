@@ -21,7 +21,7 @@ plt.close('all')
 
 
 
-with open('970428/1253.txt',"r") as f:
+with open('970427/BackwardStop.txt',"r") as f:
     variable=f.readlines()
 #--------------------
 
@@ -212,25 +212,18 @@ plt.xlabel('Z')
 
 plt.figure(4)
 
-plt.subplot(211)
+plt.subplot(311)
 plt.plot(Angpi)
-plt.title('AAngle')
+plt.title('Angle')
 
-plt.subplot(212)
+plt.subplot(312)
 plt.plot(distance)
 plt.title('distance')
 
-plt.figure(5)
-
-plt.subplot(211)
+plt.subplot(313)
 y=abs(y)
 plt.plot( y, 'g-', linewidth=2, label='filtered data')
 plt.title('filtered norm abs')
-
-plt.subplot(212)
-plt.plot(np.abs(distance))
-plt.title('Norm abs')
-plt.xlabel('X')
 
 
 plt.show()

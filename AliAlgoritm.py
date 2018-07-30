@@ -17,15 +17,16 @@ medianDownsampleZ=[]
 ReSampleX=[]
 ReSampleY=[]
 ReSampleZ=[]
-treshold=5
-
+treshold = 5
+divide=5 #for window factor 
+DataIn_Difference=5 # diference between Data 1 and data 2
 
 eliminate_Item='22222'   #'-5'#22222
 plt.close('all')
 
 
 
-with open('970427/forward.txt',"r") as f:
+with open('970428/1256.txt',"r") as f:
     variable=f.readlines()
 #--------------------
 
@@ -67,7 +68,7 @@ ranges=len(Xdim)-10
 # a = range(10)
 # b=[a[x:x+seg_length] for x in range(0,len(a),seg_length)]
 
-divide=5 #for window factor 
+
 splitX=list(split_by(Xdim,divide))
 splitY=list(split_by(Xdim,divide))
 splitZ=list(split_by(Xdim,divide))
@@ -93,9 +94,9 @@ BaseLIneZ=ReSampleZ[15]
 # print("ReSampleX=",len(ReSampleX),"ReSampleX=",ReSampleX,"ReSampleX[15]=",ReSampleX[15])
 # print(BaseLIneX)
 
-OutX=AliAlgoritms(BaseLIneX,treshold,ReSampleX,divide)
-OutY=AliAlgoritms(BaseLIneY,treshold,ReSampleY,divide)   
-OutZ=AliAlgoritms(BaseLIneZ,treshold,ReSampleZ,divide)     
+OutX=AliAlgoritms(BaseLIneX,treshold,ReSampleX,DataIn_Difference)
+OutY=AliAlgoritms(BaseLIneY,treshold,ReSampleY,DataIn_Difference)   
+OutZ=AliAlgoritms(BaseLIneZ,treshold,ReSampleZ,DataIn_Difference)     
 
         
         

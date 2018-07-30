@@ -103,14 +103,14 @@ def AliAlgoritms(baseLines,treshold,DataReSampleIn,DataIn_Difference):
     xcc=[]
     stateFF=[]
     state=1
-    for i in range(0,len(DataReSampleIn)-5):
+    for i in range(0,len(DataReSampleIn)-DataIn_Difference):
 
-        Temp=(abs(DataReSampleIn[i]-DataReSampleIn[i+5]))
-        DisCh=abs(Temp-baseLines)
-        if(DisCh<treshold):
+        Temp=(abs(DataReSampleIn[i]-DataReSampleIn[i+DataIn_Difference]))
+        DiffData=abs(Temp-baseLines)
+        if(DiffData<treshold):
             baseLines=Temp
             xcc.append(0)
-        elif(DisCh>treshold):
+        elif(DiffData>treshold):
             baseLines=Temp
             state ^=1
             xcc.append(state)

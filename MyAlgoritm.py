@@ -16,7 +16,7 @@ plt.close('all')
 
 
 
-with open('970427/forwardStop.txt',"r") as f:
+with open('970427/backwardStop.txt',"r") as f:
     variable=f.readlines()
 #--------------------
 
