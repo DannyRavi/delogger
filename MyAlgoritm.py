@@ -206,7 +206,7 @@ def ShowMyAlgortim():
     plt.plot(ArrayabsIDZdim, 'g-', linewidth=2, label='filtered data')
     plt.title('Z filtered')
    
-
+    
    
 
     plt.show()

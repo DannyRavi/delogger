@@ -1,3 +1,5 @@
+
+
 Tokens=0
 xVector=1
 yVector=2
@@ -61,6 +63,32 @@ def Integ(x):
     return z
 
 
+def normalize(dataInput,divide):
+    dem=[]
+    for x in range(len(dataInput)):
+        xx=dataInput[x]/float(divide)
+        dem.append(xx)
+    return dem
 
 
+
+
+
+def split_by(sequence, length):
+    iterable = iter(sequence)
+    def yield_length():
+        for i in range(length):
+             yield iterable.next()
+    while True:
+        res = list(yield_length())
+        if not res:
+            return
+        yield res
+
+
+def ReSample(Datain,divide):
+    cc=[]
+    for i in range(len(Datain)):
+        cc.append(Datain[i]*divide)
+    return cc   
 
