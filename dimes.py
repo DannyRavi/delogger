@@ -1,4 +1,4 @@
-
+import numpy as np
 
 Tokens=0
 xVector=1
@@ -66,7 +66,9 @@ def Integ(x):
 def normalize(dataInput,divide):
     dem=[]
     for x in range(len(dataInput)):
-        xx=dataInput[x]/float(divide)
+        xx=dataInput[x]
+        xx=np.sum(xx)
+        xx=xx/divide
         dem.append(xx)
     return dem
 
@@ -88,7 +90,37 @@ def split_by(sequence, length):
 
 def ReSample(Datain,divide):
     cc=[]
+    zz=[]
     for i in range(len(Datain)):
-        cc.append(Datain[i]*divide)
-    return cc   
+        xx=[Datain[i]]*5
+        cc.append(xx)
+    for Item in range(len(cc)):
+        for Item2 in range(divide):
+            zz.append(cc[Item][Item2])
+    return zz   
 
+def AliAlgoritms(baseLines,treshold,DataReSampleIn,DataIn_Difference):
+    xcc=[]
+    stateFF=[]
+    state=1
+    for i in range(0,len(DataReSampleIn)-5):
+
+        Temp=(abs(DataReSampleIn[i]-DataReSampleIn[i+5]))
+        DisCh=abs(Temp-baseLines)
+        if(DisCh<treshold):
+            baseLines=Temp
+            xcc.append(0)
+        elif(DisCh>treshold):
+            baseLines=Temp
+            state ^=1
+            xcc.append(state)
+    
+    T=0
+    for i in range(len(xcc)):
+        if xcc[i]==1:
+            T^=1
+        if T==1:
+            stateFF.append(1)
+        else:
+            stateFF.append(0)
+    return stateFF        

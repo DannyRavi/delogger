@@ -18,14 +18,14 @@ ReSampleX=[]
 ReSampleY=[]
 ReSampleZ=[]
 treshold=5
-state=1
+
 
 eliminate_Item='22222'   #'-5'#22222
 plt.close('all')
 
 
 
-with open('970427/forwardStop.txt',"r") as f:
+with open('970427/forward.txt',"r") as f:
     variable=f.readlines()
 #--------------------
 
@@ -68,65 +68,89 @@ ranges=len(Xdim)-10
 # b=[a[x:x+seg_length] for x in range(0,len(a),seg_length)]
 
 divide=5 #for window factor 
-b=list(split_by(Xdim,divide))
+splitX=list(split_by(Xdim,divide))
+splitY=list(split_by(Xdim,divide))
+splitZ=list(split_by(Xdim,divide))
+# print("b=",len(splitX))
 
-medianDownsampleX=normalize(Xdim,divide)
-medianDownsampleX=normalize(Ydim,divide)
-medianDownsampleX=normalize(Zdim,divide)
-
+medianDownsampleX=normalize(splitX,divide)
+medianDownsampleY=normalize(splitY,divide)
+medianDownsampleZ=normalize(splitZ,divide)
+# print("Len=",len(medianDownsampleX),"medianDownsampleX=",medianDownsampleX,"medianDownsampleX[15]=",medianDownsampleX[5])
 
 ReSampleX=ReSample(medianDownsampleX,divide)
 ReSampleY=ReSample(medianDownsampleY,divide)
-ReSampleY=ReSample(medianDownsampleZ,divide)
+ReSampleZ=ReSample(medianDownsampleZ,divide)
 
-print(len(ReSampleX))
-print(ReSampleX)
-print("ReSampleX")
-print(ReSampleX[15])
+# print("Len=",len(ReSampleX),"ReSample=",ReSampleX,"ReSampleX[15]=",ReSampleX[15])
 
-BaseLIneX=Xdim[15]
-# BaseLIneX=ReSampleX[15]
-# BaseLIneY=ReSampleY[15]
-# BaseLIneZ=ReSampleZ[15]
+# print("LenXdim=",len(Xdim),"Xdim=",Xdim,"Xdim[15]=",Xdim[15])
 
-print(BaseLIneX)
-# xcc=[]
-# for i in range(len(ReSampleX)):
-#     Temp=(abs(BaseLIneX-ReSampleX[i]))
-#     if((Temp-BaseLIneX)<treshold):
-#         BaseLIneX=Temp
-#     elif((Temp-BaseLIneX)>treshold):
-#         # BaseLIneX=Temp
-#         state ^=1
-#         xcc.append(state)
 
-xcc=[]
+BaseLIneX=ReSampleX[15]
+BaseLIneY=ReSampleY[15]
+BaseLIneZ=ReSampleZ[15]
+# print("ReSampleX=",len(ReSampleX),"ReSampleX=",ReSampleX,"ReSampleX[15]=",ReSampleX[15])
+# print(BaseLIneX)
 
-for i in range(0,len(Xdim)-5):
+OutX=AliAlgoritms(BaseLIneX,treshold,ReSampleX,divide)
+OutY=AliAlgoritms(BaseLIneY,treshold,ReSampleY,divide)   
+OutZ=AliAlgoritms(BaseLIneZ,treshold,ReSampleZ,divide)     
 
-    Temp=(abs(Xdim[i]-Xdim[i+5]))
-    DisCh=abs(Temp-BaseLIneX)
-    if(DisCh<treshold):
-        BaseLIneX=Temp
-        xcc.append(0)
-    elif(DisCh>treshold):
-        BaseLIneX=Temp
-        state ^=1
-        xcc.append(state)
+        
+        
+    #     for i in range(0,len(Xdim)-5):
+
+    # Temp=(abs(Xdim[i]-Xdim[i+5]))
+    # DisCh=abs(Temp-BaseLIneX)
+    # if(DisCh<treshold):
+    #     BaseLIneX=Temp
+    #     xcc.append(0)
+    # elif(DisCh>treshold):
+    #     BaseLIneX=Temp
+    #     state ^=1
+    #     xcc.append(state)
 
 plt.figure(1)
 plt.subplot(311)
-plt.plot(ReSampleX)
-
+plt.plot(Xdim)
+plt.title('input signal X')
 
 plt.subplot(312)
-plt.plot(Xdim)
-plt.title('Real signal')
+plt.plot(Ydim)
+plt.title('input signal Y')
 
 plt.subplot(313)
-plt.plot(xcc)
-plt.title('sig')
+plt.plot(Zdim)
+plt.title('input signal Z')
 
+plt.figure(2)
+plt.subplot(311)
+plt.plot(ReSampleX)
+plt.title('Resample signal X')
+
+plt.subplot(312)
+plt.plot(ReSampleY)
+plt.title('Resample signal Y')
+
+plt.subplot(313)
+plt.plot(ReSampleZ)
+plt.title('Resample signal Z')
+
+plt.figure(3)
+plt.subplot(311)
+plt.plot(OutX)
+plt.title('outPut signal X')
+
+plt.subplot(312)
+plt.plot(OutY)
+plt.title('outPut signal Y')
+
+
+
+plt.subplot(313)
+plt.plot(OutZ)
+plt.title('outPut signal Z')
 
 plt.show()
 plt.close('all')
