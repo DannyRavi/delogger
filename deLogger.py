@@ -20,7 +20,7 @@ with open('970431/658.txt',"r") as f:
 
 for i in range(len(variable)):
     grades.append(variable[i].strip('\n'))
-# print(grades)
+print(grades)
 
 
 newgrades = list(filter(lambda x : x != eliminate_Item, grades))

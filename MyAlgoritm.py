@@ -16,7 +16,7 @@ plt.close('all')
 
 
 
-with open('970427/backwardStop.txt',"r") as f:
+with open('970428/1254.txt',"r") as f:
     variable=f.readlines()
 #--------------------
 
@@ -183,28 +183,33 @@ def ShowMyAlgortim():
     plt.title('abs signal')
     plt.xlabel('Z')
 
+    # plt.figure(4)
+    # plt.subplot(111)
+    # plt.plot(FilterIDXdim, 'g-', linewidth=2, label='filtered data')
+    # plt.subplot(312)
+    # plt.plot(Ann_Execute(p))
+    # plt.title('ANN output')
+    # plt.subplot(313)
+    # plt.plot(np.abs(Xdim))
+    # plt.title('Filtered signal')
+    # plt.xlabel('X')
+    # plt.plot(Ann_Execute(p))
+    # plt.title('ANN output')
+
+
     plt.figure(4)
-    plt.subplot(311)
-    plt.plot(FilterIDXdim, 'g-', linewidth=2, label='filtered data')
-    plt.subplot(312)
-    plt.plot(Ann_Execute(p))
-    plt.title('ANN output')
-    plt.subplot(313)
-    plt.plot(np.abs(Xdim))
-    plt.title('Filtered signal')
-    plt.xlabel('X')
-
-
-    plt.figure(5)
-    plt.subplot(311)
+    plt.subplot(411)
     plt.plot(ArrayabsIDXdim, 'g-', linewidth=2, label='filtered data')
     plt.title('X filtered')
-    plt.subplot(312)
+    plt.subplot(412)
     plt.plot(ArrayabsIDYdim, 'g-', linewidth=2, label='filtered data')
     plt.title('Y filtered')
-    plt.subplot(313)
+    plt.subplot(413)
     plt.plot(ArrayabsIDZdim, 'g-', linewidth=2, label='filtered data')
     plt.title('Z filtered')
+    plt.subplot(414)
+    plt.plot(Ann_Execute(p),'r-',linewidth=2, label='ANN output')
+    plt.title('Ann Out')
    
     
    

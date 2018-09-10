@@ -26,7 +26,7 @@ plt.close('all')
 
 
 
-with open('970428/1256.txt',"r") as f:
+with open('970428/1250.txt',"r") as f:
     variable=f.readlines()
 #--------------------
 
@@ -70,8 +70,8 @@ ranges=len(Xdim)-10
 
 
 splitX=list(split_by(Xdim,divide))
-splitY=list(split_by(Xdim,divide))
-splitZ=list(split_by(Xdim,divide))
+splitY=list(split_by(Ydim,divide))
+splitZ=list(split_by(Zdim,divide))
 # print("b=",len(splitX))
 
 medianDownsampleX=normalize(splitX,divide)
