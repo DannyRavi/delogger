@@ -1,44 +1,43 @@
 import numpy as np
 
-Tokens=0
-xVector=1
-yVector=2
-zVector=3
-IrVector=4
-tVector=5
-steps=6
-steps2=5
+Tokens = 0
+xVector = 1
+yVector = 2
+zVector = 3
+IrVector = 4
+tVector = 5
+steps = 6
+steps2 = 5
 
 
 # relay
 grades = []
-TokenDim=[]
-Xdim=[]
-Ydim=[]
-Zdim=[]
-Tdim=[]
-Angpi=[]
-distance=[]
-results=[]
+TokenDim = []
+Xdim = []
+Ydim = []
+Zdim = []
+Tdim = []
+Angpi = []
+distance = []
+results = []
 
 
-
-
-def CreateDimen(Vector,dataInput,Steps):
-    dem=[]
-    for x in range(Vector,len(dataInput),Steps):
+def CreateDimen(Vector, dataInput, Steps):
+    dem = []
+    for x in range(Vector, len(dataInput), Steps):
         dem.append(dataInput[x])
-    return dem 
+    return dem
 
-def CreateDimen1(Vector,dataInput,Steps2):
-    dem=[]
-    for x in range(Vector,len(dataInput),Steps2):
+
+def CreateDimen1(Vector, dataInput, Steps2):
+    dem = []
+    for x in range(Vector, len(dataInput), Steps2):
         dem.append(dataInput[x])
-    return dem 
+    return dem
 
 
-def CreateFile(X,Y,Z,T):
-    f= open("outPutDimen.txt","w+")
+def CreateFile(X, Y, Z, T):
+    f = open("outPutDimen.txt", "w+")
     f.write(" X=> \r\n")
     f.write(str(X))
     f.write("\r\n")
@@ -51,36 +50,35 @@ def CreateFile(X,Y,Z,T):
     f.write(" T=> \r\n")
     f.write(str(T))
     f.write("\r\n")
-    f.close() 
+    f.close()
+
 
 def Integ(x):
-    z=[]
-    sum1=0
+    z = []
+    sum1 = 0
     for i in range(len(x)):
-        sum1 +=x[i]
+        sum1 += x[i]
         z.append(sum1)
 
     return z
 
 
-def normalize(dataInput,divide):
-    dem=[]
+def normalize(dataInput, divide):
+    dem = []
     for x in range(len(dataInput)):
-        xx=dataInput[x]
-        xx=np.sum(xx)
-        xx=xx/divide
+        xx = dataInput[x]
+        xx = np.sum(xx)
+        xx = xx/divide
         dem.append(xx)
     return dem
 
 
-
-
-
 def split_by(sequence, length):
     iterable = iter(sequence)
+
     def yield_length():
         for i in range(length):
-             yield iterable.next()
+            yield iterable.next()
     while True:
         res = list(yield_length())
         if not res:
@@ -88,39 +86,51 @@ def split_by(sequence, length):
         yield res
 
 
-def ReSample(Datain,divide):
-    cc=[]
-    zz=[]
+def ReSample(Datain, divide):
+    cc = []
+    zz = []
     for i in range(len(Datain)):
-        xx=[Datain[i]]*5
+        xx = [Datain[i]]*5
         cc.append(xx)
     for Item in range(len(cc)):
         for Item2 in range(divide):
             zz.append(cc[Item][Item2])
-    return zz   
+    return zz
 
-def AliAlgoritms(baseLines,treshold,DataReSampleIn,DataIn_Difference):
-    xcc=[]
-    stateFF=[]
-    state=1
-    for i in range(0,len(DataReSampleIn)-DataIn_Difference):
 
-        Temp=(abs(DataReSampleIn[i]-DataReSampleIn[i+DataIn_Difference]))
-        DiffData=abs(Temp-baseLines)
-        if(DiffData<treshold):
-            baseLines=Temp
+def AliAlgoritms(baseLines, treshold, DataReSampleIn, DataIn_Difference):
+    xcc = []
+    stateFF = []
+    state = 1
+    for i in range(0, len(DataReSampleIn)-DataIn_Difference):
+
+        Temp = (abs(DataReSampleIn[i]-DataReSampleIn[i+DataIn_Difference]))
+        DiffData = abs(Temp-baseLines)
+        if(DiffData < treshold):
+            baseLines = Temp
             xcc.append(0)
-        elif(DiffData>treshold):
-            baseLines=Temp
-            state ^=1
+        elif(DiffData > treshold):
+            baseLines = Temp
+            state ^= 1
             xcc.append(state)
-    
-    T=0
+
+    T = 0
     for i in range(len(xcc)):
-        if xcc[i]==1:
-            T^=1
-        if T==1:
+        if xcc[i] == 1:
+            T ^= 1
+        if T == 1:
             stateFF.append(1)
         else:
             stateFF.append(0)
-    return stateFF        
+    return stateFF
+
+
+def FilterAmplitude(DataIn, LowRange, HighRange):
+    NewData = []
+    for i in range(len(DataIn)):
+        if ((DataIn[i] < HighRange) and (DataIn[i] > LowRange)):
+            NewData.append(DataIn[i])
+        else:
+            NewData.append(0)
+
+    return NewData

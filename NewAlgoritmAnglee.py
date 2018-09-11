@@ -4,6 +4,7 @@ from dimes import *
 from numpy import *
 from scipy import integrate
 from numpy import linalg as LA
+import os 
 from scipy.signal import lfilter, lfilter_zi, filtfilt, butter
 
 grades = []
@@ -16,11 +17,17 @@ Angpi = []
 distance = []
 results = []
 
+
 eliminate_Item = '22222'  # '-5'#22222
 plt.close('all')
 
-
-with open('9706A2/C1_3.txt', "r") as f:
+all_files = os.listdir("BigData/") 
+Len_all_files = len(all_files)
+for numberCounter in range(Len_all_files):
+    Read_selected_files = all_files[numberCounter]
+    Read_selected_files = str(Read_selected_files)
+    
+with open('9706A2/sss', "r") as f:
     variable = f.readlines()
 # --------------------
 
@@ -219,3 +226,10 @@ plt.title('filtered norm abs')
 
 plt.show()
 plt.close('all')
+
+
+
+
+
+
+  

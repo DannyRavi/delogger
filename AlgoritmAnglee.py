@@ -1,45 +1,44 @@
 import matplotlib.pyplot as plt
 import numpy as np
-from  dimes import *
+from dimes import *
 from numpy import *
 from scipy import integrate
 from numpy import linalg as LA
 from scipy.signal import lfilter, lfilter_zi, filtfilt, butter
 
 grades = []
-TokenDim=[]
-Xdim=[]
-Ydim=[]
-Zdim=[]
-Tdim=[]
-Angpi=[]
-distance=[]
-results=[]
+TokenDim = []
+Xdim = []
+Ydim = []
+Zdim = []
+Tdim = []
+Angpi = []
+distance = []
+results = []
 
-eliminate_Item='22222'   #'-5'#22222
+eliminate_Item = '22222'  # '-5'#22222
 plt.close('all')
 
 
-
-with open('970428/1254.txt',"r") as f:
-    variable=f.readlines()
-#--------------------
+with open('970428/1254.txt', "r") as f:
+    variable = f.readlines()
+# --------------------
 
 for i in range(len(variable)):
     grades.append(variable[i].strip('\n'))
 # print(grades)
 
 
-newgrades = list(filter(lambda x : x != eliminate_Item, grades))
-TokenDim=CreateDimen(Tokens,newgrades,steps2)
-Xdim=CreateDimen1(xVector,newgrades,steps2)
-Ydim=CreateDimen1(yVector,newgrades,steps2)
-Zdim=CreateDimen1(zVector,newgrades,steps2)
+newgrades = list(filter(lambda x: x != eliminate_Item, grades))
+TokenDim = CreateDimen(Tokens, newgrades, steps2)
+Xdim = CreateDimen1(xVector, newgrades, steps2)  # سلام دنیا
+Ydim = CreateDimen1(yVector, newgrades, steps2)
+Zdim = CreateDimen1(zVector, newgrades, steps2)
 # Irdim=CreateDimen(IrVector,newgrades,steps2)
 # Tdim=CreateDimen(tVector,newgrades,steps)
-ranges=len(Xdim)-10
+ranges = len(Xdim)-10
 
-CreateFile(Xdim,Ydim,Zdim,Tdim)
+CreateFile(Xdim, Ydim, Zdim, Tdim)
 
 
 Xdim = list(map(int, Xdim))
@@ -47,18 +46,18 @@ Ydim = list(map(int, Ydim))
 Zdim = list(map(int, Zdim))
 # Irdim= list(map(int, Irdim))
 
-#Create real data
+# Create real data
 Xdim = np.abs(Xdim)
 Ydim = np.abs(Ydim)
 Zdim = np.abs(Zdim)
 # Irdim= np.abs(Irdim)
 
-#deraivate of real data
+# deraivate of real data
 DXdim = np.diff(Xdim)
 DYdim = np.diff(Ydim)
 DZdim = np.diff(Zdim)
 
-#Integral of Diff
+# Integral of Diff
 IDXdim = Integ(DXdim)
 IDYdim = Integ(DYdim)
 IDZdim = Integ(DZdim)
@@ -67,10 +66,10 @@ IDZdim = Integ(DZdim)
 # print(newgrades)
 # print("\n \n")
 print("token=>\n")
-print(CreateDimen1(Tokens,newgrades,steps2))
+print(CreateDimen1(Tokens, newgrades, steps2))
 print("\n \n")
 print("X=>\n")
-print(CreateDimen1(xVector,newgrades,steps2))
+print(CreateDimen1(xVector, newgrades, steps2))
 print("\n \n")
 # print("Y=>\n")
 # print(CreateDimen(yVector,newgrades,steps))
@@ -87,33 +86,33 @@ print("\n \n")
 
 
 def AngpiCa():
-    dem=[]
+    dem = []
     for i in range(ranges):
-        Angpi=LA.norm([Xdim[i],Ydim[i],Zdim[i]])
-        acos=np.arccos(Zdim[i]/Angpi)
+        Angpi = LA.norm([Xdim[i], Ydim[i], Zdim[i]])
+        acos = np.arccos(Zdim[i]/Angpi)
         dem.append(acos)
 
-    return dem 
+    return dem
 
 
 def Distance():
-    dem=[]
+    dem = []
     for i in range(ranges):
         # Angpi=IDXdim[i]**2
         # Angpi=LA.norm(IDXdim[i])
-        Angpi=LA.norm([IDXdim[i],IDYdim[i],IDZdim[i]])
+        Angpi = LA.norm([IDXdim[i], IDYdim[i], IDZdim[i]])
 
         # Angpi=LA.norm([IDXdim[i],IDZdim[i]])
         dem.append(Angpi)
 
-    return dem 
+    return dem
 
 
-Angpi=AngpiCa()
-distance=Distance()
+Angpi = AngpiCa()
+distance = Distance()
 # Angpi=LA.norm([3,4])
 
-b, a = butter(4, 0.1,analog=False)
+b, a = butter(4, 0.1, analog=False)
 
 # Apply the filter to xn.  Use lfilter_zi to choose the initial condition
 # of the filter.
@@ -128,8 +127,6 @@ z2, _ = lfilter(b, a, z, zi=zi*z[0])
 y = filtfilt(b, a, distance)
 
 
-
-
 print("Angpi=")
 print(Angpi)
 print("Angpi23=")
@@ -137,15 +134,6 @@ print(Angpi[24])
 print(IDXdim[24])
 print(IDYdim[24])
 print(IDZdim[24])
-
-
-
-
-
-
-
-
-
 
 
 plt.figure(1)
@@ -208,8 +196,6 @@ plt.title('abs signal')
 plt.xlabel('Z')
 
 
-
-
 plt.figure(4)
 
 plt.subplot(311)
@@ -221,8 +207,8 @@ plt.plot(distance)
 plt.title('distance')
 
 plt.subplot(313)
-y=abs(y)
-plt.plot( y, 'g-', linewidth=2, label='filtered data')
+y = abs(y)
+plt.plot(y, 'g-', linewidth=2, label='filtered data')
 plt.title('filtered norm abs')
 
 
