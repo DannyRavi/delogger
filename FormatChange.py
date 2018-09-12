@@ -6,7 +6,7 @@ all_files = os.listdir("unknownFormat/")   # imagine you're one directory above 
 thisFile = all_files[1]
 # print (thisFile)
 # !==>     ren *.* ?????.*
-
+# !==>     ren *.* ???????????????????.*
 # print(all_files)  # won't neces
 
 
