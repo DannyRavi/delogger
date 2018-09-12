@@ -90,7 +90,7 @@ def ReSample(Datain, divide):
     cc = []
     zz = []
     for i in range(len(Datain)):
-        xx = [Datain[i]]*5
+        xx = [Datain[i]] * divide
         cc.append(xx)
     for Item in range(len(cc)):
         for Item2 in range(divide):
