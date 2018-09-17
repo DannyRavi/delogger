@@ -85,7 +85,7 @@ Ydim = temp_increase
 DXdim = np.diff(Xdim)
 DYdim = np.diff(Ydim)
 
-Ddecrease = FilterAmplitude(DXdim,7,20)
+Ddecrease = FilterAmplitude(DXdim,7,20) # ! for negetive data what should I do
 Dincrease = FilterAmplitude(DYdim,7,20)
 # brono = []
 # for i in range(len(DXdim)):
