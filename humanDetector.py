@@ -22,11 +22,14 @@ ReConstruct = []
 counter = 0
 divide = 25
 
+
+
 eliminate_Item = '22222'  # '-5'#22222
 plt.close('all')
 
 all_files = os.listdir("BigData/")
 Len_all_files = len(all_files)
+
 for numberCounter in range(Len_all_files):
     Read_selected_files = all_files[numberCounter]
     Read_selected_files = str(Read_selected_files)
@@ -47,6 +50,23 @@ for numberCounter in range(Len_all_files):
         for ii in range(mini_size):
             sd = grades[i].split(',')
             ReConstruct.append(sd[ii])
+
+    Real_human_detect = []
+    def on_pick(event):
+        # Real_human_detect = []
+        # global Real_human_detect
+        # Real_human_detect = []
+        artist = event.artist
+        xmouse, ymouse = event.mouseevent.xdata, event.mouseevent.ydata
+        x, y = artist.get_xdata(), artist.get_ydata()
+        ind = event.ind
+        # print 'Artist picked:', event.artist
+        # print '{} vertices picked'.format(len(ind))
+        # print 'Pick between vertices {} and {}'.format(min(ind), max(ind)+1)
+        print 'x, y of mouse: {:.2f},{:.2f}'.format(xmouse, ymouse)
+        # print 'Data point:', x[ind[0]], y[ind[0]]
+        Real_human_detect.append(x[ind[0]])
+        # return Real_human_detect
 
     newgrades = list(filter(lambda x: x != eliminate_Item, grades))
     stepz = 5
@@ -185,74 +205,74 @@ for numberCounter in range(Len_all_files):
     # vr = y.__gt__(12);
     # print(vr)
 
-    plt.figure(1)
+   ##todo  plt.figure(1)
 
-    plt.subplot(411)
-    plt.plot(Xdim)
-    plt.title('Real signal')
+   ##todo  plt.subplot(411)
+   ##todo  plt.plot(Xdim)
+   ##todo  plt.title('Real signal')
 
-    plt.subplot(412)
-    plt.plot(XXdim)
-    plt.title('diff signal')
+   ##todo  plt.subplot(412)
+   ##todo  plt.plot(XXdim)
+   ##todo  plt.title('diff signal')
 
-    plt.subplot(413)
-    plt.plot((IDXdim))
-    plt.title('integral signal')
+   ##todo  plt.subplot(413)
+   ##todo  plt.plot((IDXdim))
+   ##todo  plt.title('integral signal')
 
-    plt.subplot(414)
-    plt.plot(np.abs(IDXdim))
-    plt.title('abs signal')
-    plt.xlabel('X')
-    # plt.show()
-    # plt.close()
-    ax_name = str(all_files[numberCounter]) + 'X.png'
-    #! plt.savefig('axs/' + ax_name)
+   ##todo  plt.subplot(414)
+   ##todo  plt.plot(np.abs(IDXdim))
+   ##todo  plt.title('abs signal')
+   ##todo  plt.xlabel('X')
+   ##todo  # plt.show()
+   ##todo  # plt.close()
+   ##todo  ax_name = str(all_files[numberCounter]) + 'X.png'
+   ##todo  #! plt.savefig('axs/' + ax_name)
 
-    plt.figure(2)
+   ##todo  plt.figure(2)
 
-    plt.subplot(411)
-    plt.plot(Ydim)
-    plt.title('Real signal')
+   ##todo  plt.subplot(411)
+   ##todo  plt.plot(Ydim)
+   ##todo  plt.title('Real signal')
 
-    plt.subplot(412)
-    plt.plot(YYdim)
-    plt.title('diff signal')
+   ##todo  plt.subplot(412)
+   ##todo  plt.plot(YYdim)
+   ##todo  plt.title('diff signal')
 
-    plt.subplot(413)
-    plt.plot((IDYdim))
-    plt.title('integral signal')
+   ##todo  plt.subplot(413)
+   ##todo  plt.plot((IDYdim))
+   ##todo  plt.title('integral signal')
 
-    plt.subplot(414)
-    plt.plot(np.abs(IDYdim))
-    plt.title('abs signal')
-    plt.xlabel('Y')
+   ##todo  plt.subplot(414)
+   ##todo  plt.plot(np.abs(IDYdim))
+   ##todo  plt.title('abs signal')
+   ##todo  plt.xlabel('Y')
 
-    ax_name = str(all_files[numberCounter]) + 'Y.png'
-    #! plt.savefig('axs/' + ax_name)
+   ##todo  ax_name = str(all_files[numberCounter]) + 'Y.png'
+   ##todo  #! plt.savefig('axs/' + ax_name)
 
-    plt.figure(3)
+   ##todo  plt.figure(3)
 
-    plt.subplot(411)
-    plt.plot(Zdim)
-    plt.title('Real signal')
+   ##todo  plt.subplot(411)
+   ##todo  plt.plot(Zdim)
+   ##todo  plt.title('Real signal')
 
-    plt.subplot(412)
-    plt.plot(ZZdim)
-    plt.title('diff signal')
+   ##todo  plt.subplot(412)
+   ##todo  plt.plot(ZZdim)
+   ##todo  plt.title('diff signal')
 
-    plt.subplot(413)
-    plt.plot((IDZdim))
-    plt.title('integral signal')
+   ##todo  plt.subplot(413)
+   ##todo  plt.plot((IDZdim))
+   ##todo  plt.title('integral signal')
 
-    plt.subplot(414)
-    plt.plot(np.abs(IDZdim))
-    plt.title('abs signal')
-    plt.xlabel('Z')
+   ##todo  plt.subplot(414)
+   ##todo  plt.plot(np.abs(IDZdim))
+   ##todo  plt.title('abs signal')
+   ##todo  plt.xlabel('Z')
 
-    ax_name = str(all_files[numberCounter]) + 'Z.png'
+   ##todo  ax_name = str(all_files[numberCounter]) + 'Z.png'
     # !plt.savefig('axs/' + ax_name)
-
-    fig = plt.figure(4)
+    
+    fig = plt.figure(1)
 
     plt.subplot(311)
     plt.plot(Angpi)
@@ -262,17 +282,21 @@ for numberCounter in range(Len_all_files):
     plt.plot(distance)
     plt.title('distance')
 
-    plt.subplot(313)
-    dist = np.array(distance)
-    y = dist.__gt__(7)
-    # plt.plot(y, 'y-', linewidth=2, label='filtered data')
-    line, = plt.plot(y, 'y-', linewidth=2, label='filtered data', picker=10)
-    # line2, = plt.plot(y, 'y-', linewidth=2, label='filtered data')
+    line, = plt.plot(distance, 'r-', linewidth=2, label='select target', picker=5)
 
     plt.title('output norm abs')
-
+    
     fig.canvas.callbacks.connect('pick_event', on_pick)
 
+
+    plt.subplot(313)
+    dist = np.array(distance)
+    y = dist.__gt__(5)
+    # plt.plot(y, 'y-', linewidth=2, label='filtered data')
+    plt.plot(y, 'y-', linewidth=2, label='filtered data')
+    plt.title('output norm abs')
+    
+    
     # plt.subplot(413)
     # y = abs(y)
     # y = y.__gt__(10)
@@ -288,20 +312,28 @@ for numberCounter in range(Len_all_files):
     #!plt.savefig('axs/' + ax_name)
     plt.show()  # ! ################### for show graph ###########################
     plt.close('all')
-
+    print("==>{0}",Real_human_detect)
     name_file_execute = str(all_files[numberCounter])
     print(name_file_execute)
-    counter += 1
+    counter += 1 # number of code execute
     print(counter)
 
     print("Real_human_detect")
-    Real_human_detect_int = [int(i) for i in Real_human_detect]
+    Real_human_detect_int = [int(iii) for iii in Real_human_detect]
     final_human_output = []
     togg = False
-    length_of_computer_export = len(Real_human_detect)
+    length_of_computer_export = len(Real_human_detect_int)
     numberCounter = 0
+    print(Real_human_detect_int)
+
     for i in range(len(y)):
-        RR = Real_human_detect[numberCounter]
+        # RR = Real_human_detect_int[numberCounter]
+        try:
+           RR = Real_human_detect_int[numberCounter]
+        except IndexError:
+           RR = 0
+        #    print ("Error")
+        
         if i == RR:
             togg ^= True
             if numberCounter < (length_of_computer_export-1):
@@ -311,7 +343,9 @@ for numberCounter in range(Len_all_files):
         else:
             final_human_output.append(0)
 
-    #print(final_human_output)
+    print(Real_human_detect)
+    Real_human_detect = []
+    Real_human_detect_int = []
 
     plt.figure(1)
 
@@ -319,6 +353,7 @@ for numberCounter in range(Len_all_files):
     plt.plot(final_human_output)
     plt.title('final_human_output')
     plt.show()
+    plt.close('all')
     CreateFileForHumandetector(final_human_output, Read_selected_files)
     grades = []
     TokenDim = []
@@ -330,4 +365,11 @@ for numberCounter in range(Len_all_files):
     distance = []
     results = []
     ReConstruct = []
+    #Real_human_detect = []
+    togg = False
+    final_human_output = []
+    
+    numberCounter = 0
     Real_human_detect = []
+    Real_human_detect_int = []
+    length_of_computer_export = 0

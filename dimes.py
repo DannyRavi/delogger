@@ -136,10 +136,13 @@ def FilterAmplitude(DataIn, LowRange, HighRange):
     return NewData
 
 
+
+
 Real_human_detect = []
-
-
 def on_pick(event):
+    Real_human_detect = []
+    # global Real_human_detect
+    # Real_human_detect = []
     artist = event.artist
     xmouse, ymouse = event.mouseevent.xdata, event.mouseevent.ydata
     x, y = artist.get_xdata(), artist.get_ydata()
@@ -150,6 +153,7 @@ def on_pick(event):
     print 'x, y of mouse: {:.2f},{:.2f}'.format(xmouse, ymouse)
     # print 'Data point:', x[ind[0]], y[ind[0]]
     Real_human_detect.append(x[ind[0]])
+    # return Real_human_detect
 
 
 def CreateFileForHumandetector(inputData, nameOfFile):

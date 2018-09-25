@@ -11,15 +11,25 @@ def on_pick(event):
     print 'x, y of mouse: {:.2f},{:.2f}'.format(xmouse, ymouse)
     # print 'Data point:', x[ind[0]], y[ind[0]]
     aa.append(x[ind[0]])
-    
+    return aa
 
 fig, ax = plt.subplots()
 
 tolerance = 10 # points
 ax.plot(range(10), 'ro-', picker=tolerance)
 
-fig.canvas.callbacks.connect('pick_event', on_pick)
+xx = fig.canvas.callbacks.connect('pick_event', on_pick)
 
 plt.show()
 plt.close()
-print(aa)
+
+aa =[]
+
+fig, ax = plt.subplots()
+ax.plot(range(20), 'y', picker=tolerance)
+
+xx = fig.canvas.callbacks.connect('pick_event', on_pick)
+
+plt.show()
+plt.close()
+print("==>", aa)
