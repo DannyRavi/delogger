@@ -158,7 +158,7 @@ d = str(s)+'al.png'
 plt.savefig('axs/'+ d)
 
 
-# plt.show()
+plt.show()
 plt.close('all')
 
 

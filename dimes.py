@@ -134,3 +134,27 @@ def FilterAmplitude(DataIn, LowRange, HighRange):
             NewData.append(0)
 
     return NewData
+
+
+Real_human_detect = []
+
+
+def on_pick(event):
+    artist = event.artist
+    xmouse, ymouse = event.mouseevent.xdata, event.mouseevent.ydata
+    x, y = artist.get_xdata(), artist.get_ydata()
+    ind = event.ind
+    # print 'Artist picked:', event.artist
+    # print '{} vertices picked'.format(len(ind))
+    # print 'Pick between vertices {} and {}'.format(min(ind), max(ind)+1)
+    print 'x, y of mouse: {:.2f},{:.2f}'.format(xmouse, ymouse)
+    # print 'Data point:', x[ind[0]], y[ind[0]]
+    Real_human_detect.append(x[ind[0]])
+
+
+def CreateFileForHumandetector(inputData, nameOfFile):
+    nameOfFile =  str (nameOfFile)
+    f = open('outHumanAlgoritm/'+ nameOfFile, "w+")
+    # f = open("outHumanAlgoritm/outPuthuman.txt", "w+")
+    f.write(str(inputData))
+    f.close()
