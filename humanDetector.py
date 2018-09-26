@@ -24,7 +24,7 @@ divide = 25
 
 
 
-eliminate_Item = '22222'  # '-5'#22222
+
 plt.close('all')
 
 all_files = os.listdir("BigData/")
@@ -40,6 +40,8 @@ for numberCounter in range(Len_all_files):
 
     for i in range(len(variable)):
         grades.append(variable[i].strip('\n'))
+
+    rangeForrirate = len(grades)    
 
     # print(grades)
 
@@ -68,16 +70,13 @@ for numberCounter in range(Len_all_files):
         Real_human_detect.append(x[ind[0]])
         # return Real_human_detect
 
-    newgrades = list(filter(lambda x: x != eliminate_Item, grades))
     stepz = 5
     Xdim = CreateDimen1(0, ReConstruct, stepz)
     Ydim = CreateDimen(1, ReConstruct, stepz)
     Zdim = CreateDimen(2, ReConstruct, stepz)
     Irdim = CreateDimen(3, ReConstruct, stepz)
     Tdim = CreateDimen(4, ReConstruct, stepz)
-    # Irdim=CreateDimen(IrVector,newReConstruct,steps2)
-    # Tdim=CreateDimen(tVector,newgrades,steps)
-    ranges = len(Xdim)-50
+
 
 
     Xdim = list(map(int, Xdim))
@@ -117,18 +116,20 @@ for numberCounter in range(Len_all_files):
     DZdim = np.diff(Zdim)
 
 
-    XXdim1 = [i for i in DXdim if i <= 3000]
-    YYdim1 = [i for i in DYdim if i <= 3000]
-    ZZdim1 = [i for i in DZdim if i <= 3000]
+    XXdim1 = [i for i in DXdim if i <= 500]
+    YYdim1 = [i for i in DYdim if i <= 500]
+    ZZdim1 = [i for i in DZdim if i <= 500]
 
-    XXdim = [i for i in XXdim1 if i >= -3000]
-    YYdim = [i for i in YYdim1 if i >= -3000]
-    ZZdim = [i for i in ZZdim1 if i >= -3000]
+    XXdim = [i for i in XXdim1 if i >= -500]
+    YYdim = [i for i in YYdim1 if i >= -500]
+    ZZdim = [i for i in ZZdim1 if i >= -500]
 
     # Integral of Diff
     IDXdim = Integ(XXdim)
     IDYdim = Integ(YYdim)
     IDZdim = Integ(ZZdim)
+
+    ranges = min(len(IDXdim),len(IDYdim),len(IDZdim),rangeForrirate) # for ban out of index list
 
     #
     ##############################
@@ -146,50 +147,63 @@ for numberCounter in range(Len_all_files):
     def Distance():
         dem = []
         for i in range(ranges):
-            # Angpi=IDXdim[i]**2
-            # Angpi=LA.norm(IDXdim[i])
             Angpi = LA.norm([IDXdim[i], IDYdim[i], IDZdim[i]])
-
-            # Angpi=LA.norm([IDXdim[i],IDZdim[i]])
             dem.append(Angpi)
-
         return dem
 
 
-    Angpi = AngpiCa()
+    # Angpi = AngpiCa()
     distance = Distance()
 
-    # print("Angpi=")
-    # print(Angpi)
-    # print("Angpi23=")
-    # print(Angpi[24])
-    # print(IDXdim[24])
-    # print(IDYdim[24])
-    # print(IDZdim[24])
-    # vr = y.__gt__(12);
-    # print(vr)
-
-    #
-    ##############################
-    #
-
-
-    
+ 
     fig = plt.figure(1)
 
-    plt.subplot(211)
+    plt.subplot(421)
     plt.plot(distance)
     plt.title('distance')
     line, = plt.plot(distance, 'r-', linewidth=2, label='select target', picker=5)
     plt.title('output norm abs')
     fig.canvas.callbacks.connect('pick_event', on_pick)
 
-    plt.subplot(212)
+    plt.subplot(422)
     dist = np.array(distance)
     y = dist.__gt__(5)
     plt.plot(y, 'y-', linewidth=2, label='filtered data')
     plt.title('output norm abs')
     
+
+    plt.subplot(423)
+    plt.plot(np.abs(XXdim))
+    plt.title('abs signal')
+    plt.xlabel('X')
+
+    plt.subplot(424)
+    plt.plot(np.abs(YYdim))
+    plt.title('abs signal')
+    plt.xlabel('Y')
+
+
+    plt.subplot(425)
+    plt.plot(np.abs(IDZdim))
+    plt.title('abs signal')
+    plt.xlabel('Z')
+
+
+    plt.subplot(426)
+    plt.plot(DXdim)
+    plt.title('Real signal')
+    plt.xlabel('X dim')
+
+    plt.subplot(427)
+    plt.plot(DYdim)
+    plt.title('Real signal')
+    plt.xlabel('Y dim')
+
+    plt.subplot(428)
+    plt.plot(Zdim)
+    plt.title('Real signal')
+    plt.xlabel('Z dim')
+
     mng = plt.get_current_fig_manager()
     mng.resize(*mng.window.maxsize())
     plt.show() 

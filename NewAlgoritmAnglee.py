@@ -20,7 +20,7 @@ ReConstruct = []
 counter = 0
 divide = 25
 
-eliminate_Item = '22222'  # '-5'#22222
+
 plt.close('all')
 
 all_files = os.listdir("BigData/")

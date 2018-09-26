@@ -136,7 +136,7 @@ for numberCounter in range(Len_all_files):
 
 
 
-    # r2 = min(len(IDXdim),len(IDYdim),len(IDZdim),rangeForrirate)
+   
     ranges = min(len(IDXdim),len(IDYdim),len(IDZdim),rangeForrirate) # for ban out of index list
 
 
@@ -170,7 +170,7 @@ for numberCounter in range(Len_all_files):
     # for absolute
     # absIDXdim=np.abs(IDXdim)
     # absIDYdim=np.abs(IDYdim)
-    # absIDZdim=np.abs(IDZdim)
+    # absIDZdim=np.abs(IDZdcim)
 
     # for filter absolut
     # ?absIDXdim = np.abs(FilterIDXdim)
