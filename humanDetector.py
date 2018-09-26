@@ -23,8 +23,6 @@ counter = 0
 divide = 25
 
 
-
-
 plt.close('all')
 
 all_files = os.listdir("BigData/")
@@ -41,11 +39,11 @@ for numberCounter in range(Len_all_files):
     for i in range(len(variable)):
         grades.append(variable[i].strip('\n'))
 
-    rangeForrirate = len(grades)    
+    rangeForrirate = len(grades)
 
     # print(grades)
 
-        # for example 5
+    # for example 5
     # print(mini_size)
     for i in range(len(grades)):
         mini_size = len(grades[i].split(','))
@@ -54,6 +52,7 @@ for numberCounter in range(Len_all_files):
             ReConstruct.append(sd[ii])
 
     Real_human_detect = []
+
     def on_pick(event):
         # Real_human_detect = []
         # global Real_human_detect
@@ -76,8 +75,6 @@ for numberCounter in range(Len_all_files):
     Zdim = CreateDimen(2, ReConstruct, stepz)
     Irdim = CreateDimen(3, ReConstruct, stepz)
     Tdim = CreateDimen(4, ReConstruct, stepz)
-
-
 
     Xdim = list(map(int, Xdim))
     Ydim = list(map(int, Ydim))
@@ -115,7 +112,6 @@ for numberCounter in range(Len_all_files):
     DYdim = np.diff(Ydim)
     DZdim = np.diff(Zdim)
 
-
     XXdim1 = [i for i in DXdim if i <= 500]
     YYdim1 = [i for i in DYdim if i <= 500]
     ZZdim1 = [i for i in DZdim if i <= 500]
@@ -129,7 +125,8 @@ for numberCounter in range(Len_all_files):
     IDYdim = Integ(YYdim)
     IDZdim = Integ(ZZdim)
 
-    ranges = min(len(IDXdim),len(IDYdim),len(IDZdim),rangeForrirate) # for ban out of index list
+    ranges = min(len(IDXdim), len(IDYdim), len(IDZdim),
+                 rangeForrirate)  # for ban out of index list
 
     #
     ##############################
@@ -151,75 +148,54 @@ for numberCounter in range(Len_all_files):
             dem.append(Angpi)
         return dem
 
-
     # Angpi = AngpiCa()
     distance = Distance()
 
- 
     fig = plt.figure(1)
 
-    plt.subplot(421)
+    plt.subplot(321)
     plt.plot(distance)
     plt.title('distance')
-    line, = plt.plot(distance, 'r-', linewidth=2, label='select target', picker=5)
+    line, = plt.plot(distance, 'r-', linewidth=2,
+                     label='select target', picker=5)
     plt.title('output norm abs')
     fig.canvas.callbacks.connect('pick_event', on_pick)
 
-    plt.subplot(422)
+    plt.subplot(322)
     dist = np.array(distance)
     y = dist.__gt__(5)
     plt.plot(y, 'y-', linewidth=2, label='filtered data')
     plt.title('output norm abs')
-    
 
-    plt.subplot(423)
-    plt.plot(np.abs(XXdim))
-    plt.title('abs signal')
+    plt.subplot(323)
+    plt.plot(np.abs(IDXdim))
+    plt.title('integral signal x')
     plt.xlabel('X')
 
-    plt.subplot(424)
-    plt.plot(np.abs(YYdim))
-    plt.title('abs signal')
+    plt.subplot(324)
+    plt.plot(np.abs(IDYdim))
+    plt.title('integral signal y')
     plt.xlabel('Y')
 
-
-    plt.subplot(425)
+    plt.subplot(325)
     plt.plot(np.abs(IDZdim))
-    plt.title('abs signal')
+    plt.title('integral signal z')
     plt.xlabel('Z')
 
 
-    plt.subplot(426)
-    plt.plot(DXdim)
-    plt.title('Real signal')
-    plt.xlabel('X dim')
-
-    plt.subplot(427)
-    plt.plot(DYdim)
-    plt.title('Real signal')
-    plt.xlabel('Y dim')
-
-    plt.subplot(428)
-    plt.plot(Zdim)
-    plt.title('Real signal')
-    plt.xlabel('Z dim')
-
     mng = plt.get_current_fig_manager()
     mng.resize(*mng.window.maxsize())
-    plt.show() 
+    plt.show()
     plt.close('all')
 
     #
     ##############################
     #
 
-
     name_file_execute = str(all_files[numberCounter])
     print(name_file_execute)
-    counter += 1 # number of code execute
+    counter += 1  # number of code execute
     print(counter)
-
-
 
     Real_human_detect_int = [int(iii) for iii in Real_human_detect]
     final_human_output = []
@@ -227,17 +203,16 @@ for numberCounter in range(Len_all_files):
     length_of_computer_export = len(Real_human_detect_int)
     numberCounter = 0
 
-
     '''this segment for export of logical human data '''
     for i in range(len(y)):
         # RR = Real_human_detect_int[numberCounter]
         try:
-           RR = Real_human_detect_int[numberCounter]
+            RR = Real_human_detect_int[numberCounter]
         except IndexError:
-           RR = 0
+            RR = 0.0001
         #    print ("Error")
-        
-        if i == RR:
+
+        if (i == RR):
             togg ^= True
             if numberCounter < (length_of_computer_export-1):
                 numberCounter += 1
@@ -257,9 +232,7 @@ for numberCounter in range(Len_all_files):
     plt.show()
     plt.close('all')
 
-
     CreateFileForHumandetector(final_human_output, Read_selected_files)
-
 
     grades = []
     TokenDim = []

@@ -20,8 +20,9 @@ Battry_volt = 3.3
 
 
 #
-#! SUM CONSUME
-#
+#! SUM CONSUME   STM8L151K4T6 = 15 - 20
+# atmega 16  /  stm32f103c8 / 
+# STM8L151K4T6 = 15 - 20  / 
 
 
 All_max_component_AT328 = ((Nrf_Tx / 3600)) + Hmc + \
@@ -73,3 +74,6 @@ print(consumer_days(stm8L_veryLow_componen), "days ==> stm8L_veryLow_componen")
 # https://electronics.stackexchange.com/questions/247456/what-is-the-best-way-to-estimate-the-power-consumption-of-an-atmega328p-microcon
 # https://www.st.com/en/microcontrollers/stm8l-series.html?querycriteria=productId=SS1336
 # https://www.st.com/content/st_com/en/products/microcontrollers/stm8-8-bit-mcus/stm8l-series/stm8l151-152/stm8l152k4.html
+
+
+print("amp",All_min_component_AT328)
