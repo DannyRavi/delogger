@@ -79,7 +79,6 @@ for numberCounter in range(Len_all_files):
     # Tdim=CreateDimen(tVector,newgrades,steps)
     ranges = len(Xdim)-50
 
-    # ? CreateFile(Xdim, Ydim, Zdim, Tdim)
 
     Xdim = list(map(int, Xdim))
     Ydim = list(map(int, Ydim))
@@ -117,9 +116,6 @@ for numberCounter in range(Len_all_files):
     DYdim = np.diff(Ydim)
     DZdim = np.diff(Zdim)
 
-    # ? XXdim = FilterAmplitude (DXdim,-2000,2000) #[i for i in DXdim if i <= 1000]
-    # ? YYdim = FilterAmplitude (DYdim,-2000,2000) #[i for i in DYdim if i <= 1000] # limit ovf
-    # ? ZZdim = FilterAmplitude (DZdim,-2000,2000) #[i for i in DZdim if i <= 1000]
 
     XXdim1 = [i for i in DXdim if i <= 3000]
     YYdim1 = [i for i in DYdim if i <= 3000]
@@ -134,26 +130,9 @@ for numberCounter in range(Len_all_files):
     IDYdim = Integ(YYdim)
     IDZdim = Integ(ZZdim)
 
-    # print("allItem=>\n")
-    # print(newgrades)
-    # print("\n \n")
-    # print("token=>\n")
-    # print(CreateDimen1(Tokens,newgrades,steps2))
-    # print("\n \n")
-    # print("X=>\n")
-    # print(CreateDimen1(xVector,newgrades,steps2))
-    # print("\n \n")
-    # print("Y=>\n")
-    # print(CreateDimen(yVector,newgrades,steps))
-    # print("\n \n")
-    # print("Z=>\n")
-    # print(CreateDimen(zVector,newgrades,steps))
-    # print("\n \n")
-    # print("t=>\n")
-    # print(CreateDimen(tVector,newgrades,steps))
-
-    # Angpi=np.arccos((float(Xdim[50]/(LA.norm([Xdim[50],Ydim[50],Zdim[50]])))))
-    # Angpi=np.arccos((float(Xdim/(LA.norm([Xdim,Ydim,Zdim])))))
+    #
+    ##############################
+    #
 
     def AngpiCa():
         dem = []
@@ -176,24 +155,9 @@ for numberCounter in range(Len_all_files):
 
         return dem
 
-# ?
+
     Angpi = AngpiCa()
     distance = Distance()
-
-# ?
-    # ? b, a = butter(4, 0.1, analog=False)
-# ?
-    # ? # Apply the filter to xn.  Use lfilter_zi to choose the initial condition
-    # ? # of the filter.
-    # ? zi = lfilter_zi(b, a)
-    # ? z, _ = lfilter(b, a, distance, zi=zi*distance[0])
-# ?
-    # ? # Apply the filter again, to have a result filtered at an order
-    # ? # the same as filtfilt.
-    # ? z2, _ = lfilter(b, a, z, zi=zi*z[0])
-# ?
-    # ? # Use filtfilt to apply the filter.
-    # ? y = filtfilt(b, a, distance)
 
     # print("Angpi=")
     # print(Angpi)
@@ -205,127 +169,52 @@ for numberCounter in range(Len_all_files):
     # vr = y.__gt__(12);
     # print(vr)
 
-   ##todo  plt.figure(1)
+    #
+    ##############################
+    #
 
-   ##todo  plt.subplot(411)
-   ##todo  plt.plot(Xdim)
-   ##todo  plt.title('Real signal')
 
-   ##todo  plt.subplot(412)
-   ##todo  plt.plot(XXdim)
-   ##todo  plt.title('diff signal')
-
-   ##todo  plt.subplot(413)
-   ##todo  plt.plot((IDXdim))
-   ##todo  plt.title('integral signal')
-
-   ##todo  plt.subplot(414)
-   ##todo  plt.plot(np.abs(IDXdim))
-   ##todo  plt.title('abs signal')
-   ##todo  plt.xlabel('X')
-   ##todo  # plt.show()
-   ##todo  # plt.close()
-   ##todo  ax_name = str(all_files[numberCounter]) + 'X.png'
-   ##todo  #! plt.savefig('axs/' + ax_name)
-
-   ##todo  plt.figure(2)
-
-   ##todo  plt.subplot(411)
-   ##todo  plt.plot(Ydim)
-   ##todo  plt.title('Real signal')
-
-   ##todo  plt.subplot(412)
-   ##todo  plt.plot(YYdim)
-   ##todo  plt.title('diff signal')
-
-   ##todo  plt.subplot(413)
-   ##todo  plt.plot((IDYdim))
-   ##todo  plt.title('integral signal')
-
-   ##todo  plt.subplot(414)
-   ##todo  plt.plot(np.abs(IDYdim))
-   ##todo  plt.title('abs signal')
-   ##todo  plt.xlabel('Y')
-
-   ##todo  ax_name = str(all_files[numberCounter]) + 'Y.png'
-   ##todo  #! plt.savefig('axs/' + ax_name)
-
-   ##todo  plt.figure(3)
-
-   ##todo  plt.subplot(411)
-   ##todo  plt.plot(Zdim)
-   ##todo  plt.title('Real signal')
-
-   ##todo  plt.subplot(412)
-   ##todo  plt.plot(ZZdim)
-   ##todo  plt.title('diff signal')
-
-   ##todo  plt.subplot(413)
-   ##todo  plt.plot((IDZdim))
-   ##todo  plt.title('integral signal')
-
-   ##todo  plt.subplot(414)
-   ##todo  plt.plot(np.abs(IDZdim))
-   ##todo  plt.title('abs signal')
-   ##todo  plt.xlabel('Z')
-
-   ##todo  ax_name = str(all_files[numberCounter]) + 'Z.png'
-    # !plt.savefig('axs/' + ax_name)
     
     fig = plt.figure(1)
 
-    plt.subplot(311)
-    plt.plot(Angpi)
-    plt.title('Angle')
-
-    plt.subplot(312)
+    plt.subplot(211)
     plt.plot(distance)
     plt.title('distance')
-
     line, = plt.plot(distance, 'r-', linewidth=2, label='select target', picker=5)
-
     plt.title('output norm abs')
-    
     fig.canvas.callbacks.connect('pick_event', on_pick)
 
-
-    plt.subplot(313)
+    plt.subplot(212)
     dist = np.array(distance)
     y = dist.__gt__(5)
-    # plt.plot(y, 'y-', linewidth=2, label='filtered data')
     plt.plot(y, 'y-', linewidth=2, label='filtered data')
     plt.title('output norm abs')
     
-    
-    # plt.subplot(413)
-    # y = abs(y)
-    # y = y.__gt__(10)
-    # plt.plot(y, 'g-', linewidth=2, label='filtered data')
-    # plt.title('filtered norm abs')
-#
-    # plt.subplot(413)
-    # y = distance.__gt__(12)
-    # plt.plot(y, 'y-', linewidth=2, label='filtered data')
-    # plt.title('output norm abs')
-
-    ax_name = str(all_files[numberCounter]) + 'out.png'
-    #!plt.savefig('axs/' + ax_name)
-    plt.show()  # ! ################### for show graph ###########################
+    mng = plt.get_current_fig_manager()
+    mng.resize(*mng.window.maxsize())
+    plt.show() 
     plt.close('all')
-    print("==>{0}",Real_human_detect)
+
+    #
+    ##############################
+    #
+
+
     name_file_execute = str(all_files[numberCounter])
     print(name_file_execute)
     counter += 1 # number of code execute
     print(counter)
 
-    print("Real_human_detect")
+
+
     Real_human_detect_int = [int(iii) for iii in Real_human_detect]
     final_human_output = []
     togg = False
     length_of_computer_export = len(Real_human_detect_int)
     numberCounter = 0
-    print(Real_human_detect_int)
 
+
+    '''this segment for export of logical human data '''
     for i in range(len(y)):
         # RR = Real_human_detect_int[numberCounter]
         try:
@@ -348,13 +237,16 @@ for numberCounter in range(Len_all_files):
     Real_human_detect_int = []
 
     plt.figure(1)
-
     plt.subplot(111)
     plt.plot(final_human_output)
     plt.title('final_human_output')
     plt.show()
     plt.close('all')
+
+
     CreateFileForHumandetector(final_human_output, Read_selected_files)
+
+
     grades = []
     TokenDim = []
     Xdim = []
@@ -365,10 +257,8 @@ for numberCounter in range(Len_all_files):
     distance = []
     results = []
     ReConstruct = []
-    #Real_human_detect = []
     togg = False
     final_human_output = []
-    
     numberCounter = 0
     Real_human_detect = []
     Real_human_detect_int = []
