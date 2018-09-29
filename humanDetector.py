@@ -70,7 +70,7 @@ for numberCounter in range(Len_all_files):
         # return Real_human_detect
 
     stepz = 5
-    Xdim = CreateDimen1(0, ReConstruct, stepz)
+    Xdim = CreateDimen(0, ReConstruct, stepz)
     Ydim = CreateDimen(1, ReConstruct, stepz)
     Zdim = CreateDimen(2, ReConstruct, stepz)
     Irdim = CreateDimen(3, ReConstruct, stepz)

@@ -19,7 +19,7 @@ results = []
 ReConstruct = []
 counter = 0
 divide = 25
-
+Refrence_for_detect = 5
 
 plt.close('all')
 
@@ -39,23 +39,23 @@ for numberCounter in range(Len_all_files):
     # print(grades)
 
         # for example 5
-    # print(mini_size)
+    '''data goto the computer underStand'''
     for i in range(len(grades)):
         mini_size = len(grades[i].split(','))
         for ii in range(mini_size):
             sd = grades[i].split(',')
             ReConstruct.append(sd[ii])
 
-    newgrades = list(filter(lambda x: x != eliminate_Item, grades))
+    
     stepz = 5
-    Xdim = CreateDimen1(0, ReConstruct, stepz)
+    Xdim = CreateDimen(0, ReConstruct, stepz)
     Ydim = CreateDimen(1, ReConstruct, stepz)
     Zdim = CreateDimen(2, ReConstruct, stepz)
     Irdim = CreateDimen(3, ReConstruct, stepz)
     Tdim = CreateDimen(4, ReConstruct, stepz)
     # Irdim=CreateDimen(IrVector,newReConstruct,steps2)
     # Tdim=CreateDimen(tVector,newgrades,steps)
-    ranges = len(Xdim)-50
+    
 
     # ? CreateFile(Xdim, Ydim, Zdim, Tdim)
 
@@ -99,19 +99,21 @@ for numberCounter in range(Len_all_files):
     # ? YYdim = FilterAmplitude (DYdim,-2000,2000) #[i for i in DYdim if i <= 1000] # limit ovf
     # ? ZZdim = FilterAmplitude (DZdim,-2000,2000) #[i for i in DZdim if i <= 1000]
 
-    XXdim1 = [i for i in DXdim if i <= 3000]
-    YYdim1 = [i for i in DYdim if i <= 3000]
-    ZZdim1 = [i for i in DZdim if i <= 3000]
+    XXdim1 = [i for i in DXdim if i <= 500]
+    YYdim1 = [i for i in DYdim if i <= 500]
+    ZZdim1 = [i for i in DZdim if i <= 500]
 
-    XXdim = [i for i in XXdim1 if i >= -3000]
-    YYdim = [i for i in YYdim1 if i >= -3000]
-    ZZdim = [i for i in ZZdim1 if i >= -3000]
+    XXdim = [i for i in XXdim1 if i >= -500]
+    YYdim = [i for i in YYdim1 if i >= -500]
+    ZZdim = [i for i in ZZdim1 if i >= -500]
 
     # Integral of Diff
     IDXdim = Integ(XXdim)
     IDYdim = Integ(YYdim)
     IDZdim = Integ(ZZdim)
 
+
+    ranges = min(len(IDXdim),len(IDYdim),len(IDZdim)) # for ban out of index list
     # print("allItem=>\n")
     # print(newgrades)
     # print("\n \n")
@@ -154,24 +156,11 @@ for numberCounter in range(Len_all_files):
 
         return dem
 
-# ?
+
     Angpi = AngpiCa()
     distance = Distance()
   
-# ?
-    # ? b, a = butter(4, 0.1, analog=False)
-# ?
-    # ? # Apply the filter to xn.  Use lfilter_zi to choose the initial condition
-    # ? # of the filter.
-    # ? zi = lfilter_zi(b, a)
-    # ? z, _ = lfilter(b, a, distance, zi=zi*distance[0])
-# ?
-    # ? # Apply the filter again, to have a result filtered at an order
-    # ? # the same as filtfilt.
-    # ? z2, _ = lfilter(b, a, z, zi=zi*z[0])
-# ?
-    # ? # Use filtfilt to apply the filter.
-    # ? y = filtfilt(b, a, distance)
+
 
     # print("Angpi=")
     # print(Angpi)
@@ -203,8 +192,8 @@ for numberCounter in range(Len_all_files):
     plt.xlabel('X')
     # plt.show()
     # plt.close()
-    ax_name = str(all_files[numberCounter]) + 'X.png'
-    plt.savefig('axs/' + ax_name)
+    ##! ax_name = str(all_files[numberCounter]) + 'X.png'
+    ##! plt.savefig('axs/' + ax_name)
 
     plt.figure(2)
 
@@ -225,8 +214,8 @@ for numberCounter in range(Len_all_files):
     plt.title('abs signal')
     plt.xlabel('Y')
 
-    ax_name = str(all_files[numberCounter]) + 'Y.png'
-    plt.savefig('axs/' + ax_name)
+    ##! ax_name = str(all_files[numberCounter]) + 'Y.png'
+    ##! plt.savefig('axs/' + ax_name)
 
     plt.figure(3)
 
@@ -247,8 +236,8 @@ for numberCounter in range(Len_all_files):
     plt.title('abs signal')
     plt.xlabel('Z')
 
-    ax_name = str(all_files[numberCounter]) + 'Z.png'
-    plt.savefig('axs/' + ax_name)
+    ##! ax_name = str(all_files[numberCounter]) + 'Z.png'
+    ##! plt.savefig('axs/' + ax_name)
 
     plt.figure(4)
 
@@ -262,27 +251,28 @@ for numberCounter in range(Len_all_files):
 
     plt.subplot(313)
     dist = np.array(distance)
-    y = dist.__gt__(7)
+    y = dist.__gt__(Refrence_for_detect)
+    floo = y
     plt.plot(y, 'y-', linewidth=2, label='filtered data')
     plt.title('output norm abs')
 
-    # plt.subplot(413)
-    # y = abs(y)
-    # y = y.__gt__(10)
-    # plt.plot(y, 'g-', linewidth=2, label='filtered data')
-    # plt.title('filtered norm abs')
-#
-    # plt.subplot(413)
-    # y = distance.__gt__(12)
-    # plt.plot(y, 'y-', linewidth=2, label='filtered data')
-    # plt.title('output norm abs')
 
-    ax_name = str(all_files[numberCounter]) + 'out.png'
-    plt.savefig('axs/' + ax_name)
-    # plt.show()  #! ################### for show graph ###########################
-    plt.close('all')
+    ##! ax_name = str(all_files[numberCounter]) + 'out.png'
+    ##! plt.savefig('axs/' + ax_name)
+    # plt.show()       #! ################### for show graph ############################
+    # plt.close('all') #! ################### for close graph ###########################
+    algoritm_detect = []
+    for i in range(len(dist)):
+        if( dist[i] > Refrence_for_detect):
+            algoritm_detect.append(1)
+        else:
+            algoritm_detect.append(0)
 
+    
     name_file_execute = str(all_files[numberCounter])
+    
+    CreateFile_outputAloritm (algoritm_detect, name_file_execute)
+
     print(name_file_execute)
     counter += 1
     print(counter)
@@ -297,3 +287,4 @@ for numberCounter in range(Len_all_files):
     distance = []
     results = []
     ReConstruct = []
+    algoritm_detect = []

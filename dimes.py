@@ -159,6 +159,12 @@ def on_pick(event):
 def CreateFileForHumandetector(inputData, nameOfFile):
     nameOfFile =  str (nameOfFile)
     f = open('outHumanAlgoritm/'+ nameOfFile, "w+")
-    # f = open("outHumanAlgoritm/outPuthuman.txt", "w+")
+    f.write(str(inputData))
+    f.close()
+
+
+def CreateFile_outputAloritm(inputData, nameOfFile):
+    nameOfFile =  str (nameOfFile)
+    f = open('OutputAlgoritm/'+ nameOfFile, "w+")
     f.write(str(inputData))
     f.close()
