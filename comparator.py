@@ -27,6 +27,11 @@ final = []
 minArrayd = 0.0
 StChange = 0
 StChange2 = 0
+ArStateChange = []
+ArStateChange2 = []
+NumberFualt = 0.0
+numberExe = 0
+
 
 plt.close('all')
 
@@ -77,7 +82,7 @@ for numberCounter in range(Len_all_files):
     Equals = []
     listToInt =[]
     listToInt2 =[]
-    for i in range(len(ReConstruct)):
+    for i in range(len(ReConstruct)-100):
         listToStr = ''.join(ReConstruct[i])
         try:
             strToInt = int(listToStr)
@@ -85,27 +90,21 @@ for numberCounter in range(Len_all_files):
         except ValueError:
             pass      # or whatever
 
-    for i in range(len(ReConstruct2)):
+    for i in range(len(ReConstruct2)-100):
         listToStr = ''.join(ReConstruct2[i])
         try:
             strToInt = int(listToStr)
             listToInt2.append(strToInt)
         except ValueError:
             pass      # or whatever
-
-
-    #togg1 = False      
-    #ArStateChange = []        
-    #for i in range(len(listToInt)-1):
-    #    StChange = abs(listToInt[i] - listToInt[i-1])
-    #    if StChange == 1:
-    #        togg1 ^= True
-    #    if togg == True:
-    #        ArStateChange.append(1)
-    #    else:
-    #        ArStateChange.append(0)
+###here
+    ArStateChange = CreateFlag(listToInt)
+    ArStateChange2 = CreateFlag(listToInt2)
+    NumberFualt += Comrator2data(ArStateChange,ArStateChange2)       
 
     Equals = [] 
+    print("Human==>",ArStateChange)
+    print("machine==>",ArStateChange2)
     minArray = min(len(listToInt) , len(listToInt2))
     for i in range(minArray):
         equal = listToInt[i] - listToInt2[i]
@@ -120,13 +119,17 @@ for numberCounter in range(Len_all_files):
     sumz = totalSum/minArray 
     precent = sumz * 100
     #final[numberCounter] = precent
-    print('==>',precent)
+    print('%==>',precent)
 
     final.append(precent)
+
+    print("NumberExe===>",numberExe)
 
     #f = open('CompareData/Stage1/csvfile.csv','w')
     #f.write('hi there\n') #Give your csv text here.
     ### Python will convert \n to os.linesep
+
+    
     #f.close()
     
     valval = []
@@ -147,15 +150,20 @@ for numberCounter in range(Len_all_files):
     ReConstruct2 = []
     togg = False
     final_human_output = []
-    numberCounter = 0
+    #numberCounter = 0
     Real_human_detect = []
     Real_human_detect_int = []
     length_of_computer_export = 0
     variable = 0
     variable2 = 0
+    ArStateChange = []
+    ArStateChange2 = []
 
 
 lasFinal = 0.0
 finall = sum(final)
 lasFinal = (finall/minArrayd) * 100
 print('END',lasFinal)    
+print("NumberFualt",NumberFualt)
+perecenteFualt = (NumberFualt / Len_all_files ) * 100
+print("%NumberFualt==>",str(perecenteFualt)+" %")

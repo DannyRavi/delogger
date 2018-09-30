@@ -20,7 +20,11 @@ distance = []
 results = []
 ReConstruct = []
 counter = 0
-divide = 25
+Refrence_for_detect = 6
+midNumber = []
+CreateZeroIndex = 170
+midNumber = [0] * CreateZeroIndex
+divide = 2
 
 
 plt.close('all')
@@ -125,8 +129,7 @@ for numberCounter in range(Len_all_files):
     IDYdim = Integ(YYdim)
     IDZdim = Integ(ZZdim)
 
-    ranges = min(len(IDXdim), len(IDYdim), len(IDZdim),
-                 rangeForrirate)  # for ban out of index list
+    ranges = min(len(IDXdim), len(IDYdim), len(IDZdim),rangeForrirate)  # for ban out of index list
 
     #
     ##############################
@@ -149,23 +152,37 @@ for numberCounter in range(Len_all_files):
         return dem
 
     # Angpi = AngpiCa()
+    
     distance = Distance()
+
+
+    SummidNumber = []
+    dist = np.array(distance)
+    stackCount = 0
+    for i in range(len(dist)):
+        midNumber[stackCount] = dist[i]
+        stackCount += 1
+        sumdiv = sum(midNumber)/len(midNumber)
+        SummidNumber.append(sumdiv)
+        if stackCount == len(midNumber):
+            stackCount = 0
 
     fig = plt.figure(1)
 
     plt.subplot(321)
-    plt.plot(distance)
+    sumFormatMath = np.array(SummidNumber)
+    plt.plot(sumFormatMath)
     plt.title('distance')
-    line, = plt.plot(distance, 'r-', linewidth=2,
-                     label='select target', picker=5)
+    line, = plt.plot(sumFormatMath, 'r-', linewidth=2,
+                     label='select target', picker=10)
     plt.title('output norm abs')
     fig.canvas.callbacks.connect('pick_event', on_pick)
 
     plt.subplot(322)
-    dist = np.array(distance)
-    y = dist.__gt__(5)
-    plt.plot(y, 'y-', linewidth=2, label='filtered data')
-    plt.title('output norm abs')
+    sumFormatMath = np.array(SummidNumber)
+    RefrenceCut = sumFormatMath.__gt__(Refrence_for_detect)
+    plt.plot(RefrenceCut, 'b-', linewidth=2, label='filtered data')
+    plt.title('output sum4norm aRefrenceCut')
 
     plt.subplot(323)
     plt.plot(np.abs(IDXdim))
@@ -182,6 +199,10 @@ for numberCounter in range(Len_all_files):
     plt.title('integral signal z')
     plt.xlabel('Z')
 
+    plt.subplot(326)
+    plt.plot(dist, 'y-', linewidth=2, label='filtered data')
+    plt.title('Real output')
+    
 
     mng = plt.get_current_fig_manager()
     mng.resize(*mng.window.maxsize())
@@ -189,7 +210,7 @@ for numberCounter in range(Len_all_files):
     plt.close('all')
 
     #
-    ##############################
+    ###############################
     #
 
     name_file_execute = str(all_files[numberCounter])
@@ -204,7 +225,7 @@ for numberCounter in range(Len_all_files):
     numberCounter = 0
 
     '''this segment for export of logical human data '''
-    for i in range(len(y)):
+    for i in range(len(RefrenceCut)):
         # RR = Real_human_detect_int[numberCounter]
         try:
             RR = Real_human_detect_int[numberCounter]
@@ -250,3 +271,6 @@ for numberCounter in range(Len_all_files):
     Real_human_detect = []
     Real_human_detect_int = []
     length_of_computer_export = 0
+    algoritm_detect = []
+    midNumber = []
+    midNumber = [0] * CreateZeroIndex

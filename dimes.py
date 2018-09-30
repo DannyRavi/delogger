@@ -168,3 +168,44 @@ def CreateFile_outputAloritm(inputData, nameOfFile):
     f = open('OutputAlgoritm/'+ nameOfFile, "w+")
     f.write(str(inputData))
     f.close()
+
+
+def CreateFlag(dataIn):
+    togg1 = False 
+    togg2 = True
+    togg3 = True    
+    Change = []        
+    for i in range(len(dataIn)-1):
+        StChange = abs(dataIn[i] - dataIn[i+1])
+        if StChange == 1 :
+            togg1 ^= True
+        if togg1 == True and togg2:
+            Change.append(1)
+            togg2 = False
+            togg3 = True
+        if(togg1 == False and togg3):
+            togg2 = True
+            togg3 = False
+            Change.append(0)
+    return Change       
+
+def Comrator2data(In1,In2):
+    LengthIn1 = len(In1)
+    LengthIn2 = len(In2)
+    Toggle1 = True
+    Number = 0
+    if(LengthIn1 == LengthIn2):
+        for i in range(LengthIn1):
+            if(In1[i] == In2[i]):
+                LengthIn1 = len(In1)
+            else:
+                Toggle1 = False
+        if Toggle1:
+            print ("    Match")
+        else:
+            print ("    NOT Match")
+            Number = 1          
+    else:
+        print ("    NOT Match")
+        Number = 1
+    return  Number  

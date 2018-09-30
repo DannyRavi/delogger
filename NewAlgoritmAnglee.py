@@ -19,8 +19,10 @@ results = []
 ReConstruct = []
 counter = 0
 divide = 25
-Refrence_for_detect = 5
-
+Refrence_for_detect = 7
+midNumber = []
+CreateZeroIndex = 150
+midNumber = [0] * CreateZeroIndex
 plt.close('all')
 
 all_files = os.listdir("BigData/")
@@ -46,7 +48,6 @@ for numberCounter in range(Len_all_files):
             sd = grades[i].split(',')
             ReConstruct.append(sd[ii])
 
-    
     stepz = 5
     Xdim = CreateDimen(0, ReConstruct, stepz)
     Ydim = CreateDimen(1, ReConstruct, stepz)
@@ -55,7 +56,6 @@ for numberCounter in range(Len_all_files):
     Tdim = CreateDimen(4, ReConstruct, stepz)
     # Irdim=CreateDimen(IrVector,newReConstruct,steps2)
     # Tdim=CreateDimen(tVector,newgrades,steps)
-    
 
     # ? CreateFile(Xdim, Ydim, Zdim, Tdim)
 
@@ -112,8 +112,8 @@ for numberCounter in range(Len_all_files):
     IDYdim = Integ(YYdim)
     IDZdim = Integ(ZZdim)
 
-
-    ranges = min(len(IDXdim),len(IDYdim),len(IDZdim)) # for ban out of index list
+    ranges = min(len(IDXdim), len(IDYdim), len(
+        IDZdim))  # for ban out of index list
     # print("allItem=>\n")
     # print(newgrades)
     # print("\n \n")
@@ -147,19 +147,27 @@ for numberCounter in range(Len_all_files):
     def Distance():
         dem = []
         for i in range(ranges):
-            # Angpi=IDXdim[i]**2
-            # Angpi=LA.norm(IDXdim[i])
             Angpi = LA.norm([IDXdim[i], IDYdim[i], IDZdim[i]])
-
-            # Angpi=LA.norm([IDXdim[i],IDZdim[i]])
             dem.append(Angpi)
+        return dem    
 
-        return dem
 
 
     Angpi = AngpiCa()
     distance = Distance()
-  
+
+
+    SummidNumber = []
+    dist = np.array(distance)
+    stackCount = 0
+    for i in range(len(dist)):
+        midNumber[stackCount] = dist[i]
+        stackCount += 1
+        sumdiv = sum(midNumber)/len(midNumber)
+        SummidNumber.append(sumdiv)
+        if stackCount == len(midNumber):
+            stackCount = 0
+
 
 
     # print("Angpi=")
@@ -192,8 +200,8 @@ for numberCounter in range(Len_all_files):
     plt.xlabel('X')
     # plt.show()
     # plt.close()
-    ##! ax_name = str(all_files[numberCounter]) + 'X.png'
-    ##! plt.savefig('axs/' + ax_name)
+    # ! ax_name = str(all_files[numberCounter]) + 'X.png'
+    # ! plt.savefig('axs/' + ax_name)
 
     plt.figure(2)
 
@@ -214,8 +222,8 @@ for numberCounter in range(Len_all_files):
     plt.title('abs signal')
     plt.xlabel('Y')
 
-    ##! ax_name = str(all_files[numberCounter]) + 'Y.png'
-    ##! plt.savefig('axs/' + ax_name)
+    # ! ax_name = str(all_files[numberCounter]) + 'Y.png'
+    # ! plt.savefig('axs/' + ax_name)
 
     plt.figure(3)
 
@@ -236,42 +244,52 @@ for numberCounter in range(Len_all_files):
     plt.title('abs signal')
     plt.xlabel('Z')
 
-    ##! ax_name = str(all_files[numberCounter]) + 'Z.png'
-    ##! plt.savefig('axs/' + ax_name)
+    # ! ax_name = str(all_files[numberCounter]) + 'Z.png'
+    # ! plt.savefig('axs/' + ax_name)
 
     plt.figure(4)
 
-    plt.subplot(311)
+    plt.subplot(511)
     plt.plot(Angpi)
     plt.title('Angle')
 
-    plt.subplot(312)
-    plt.plot(distance)
+    plt.subplot(512)
+    dist = np.array(distance)
+    plt.plot(dist)
     plt.title('distance')
 
-    plt.subplot(313)
-    dist = np.array(distance)
+    plt.subplot(513)
     y = dist.__gt__(Refrence_for_detect)
-    floo = y
     plt.plot(y, 'y-', linewidth=2, label='filtered data')
     plt.title('output norm abs')
 
 
-    ##! ax_name = str(all_files[numberCounter]) + 'out.png'
-    ##! plt.savefig('axs/' + ax_name)
-    # plt.show()       #! ################### for show graph ############################
-    # plt.close('all') #! ################### for close graph ###########################
+    plt.subplot(514)
+    sumFormatMath = np.array(SummidNumber)
+    RefrenceCut = sumFormatMath.__gt__(Refrence_for_detect)
+    plt.plot(RefrenceCut, 'b-', linewidth=2, label='filtered data')
+    plt.title('output sum4norm aRefrenceCut')
+    
+    plt.subplot(515)
+    sumFormatMath = np.array(SummidNumber)
+    plt.plot(sumFormatMath, 'b-', linewidth=2, label='filtered data')
+    plt.title('sumFormatMath')
+
+    # ! ax_name = str(all_files[numberCounter]) + 'out.png'
+    # ! plt.savefig('axs/' + ax_name)
+    #! plt.show()       #! ################### for show graph ############################
+    #! plt.close('all') #! ################### for close graph ###########################
+
     algoritm_detect = []
-    for i in range(len(dist)):
-        if( dist[i] > Refrence_for_detect):
+    for i in range(len(sumFormatMath)):
+        if(sumFormatMath[i] > Refrence_for_detect):
             algoritm_detect.append(1)
         else:
             algoritm_detect.append(0)
 
-    
     name_file_execute = str(all_files[numberCounter])
-    
-    CreateFile_outputAloritm (algoritm_detect, name_file_execute)
+
+    CreateFile_outputAloritm(algoritm_detect, name_file_execute)
 
     print(name_file_execute)
     counter += 1
@@ -288,3 +306,6 @@ for numberCounter in range(Len_all_files):
     results = []
     ReConstruct = []
     algoritm_detect = []
+    midNumber = []
+    midNumber = [0] * CreateZeroIndex
+
