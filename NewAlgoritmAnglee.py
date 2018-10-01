@@ -18,11 +18,14 @@ distance = []
 results = []
 ReConstruct = []
 counter = 0
-divide = 25
-Refrence_for_detect = 7
+divide = 2
+Refrence_for_detect = 6
 midNumber = []
-CreateZeroIndex = 150
+CreateZeroIndex = 170
 midNumber = [0] * CreateZeroIndex
+EndDataEliminate = 35
+
+
 plt.close('all')
 
 all_files = os.listdir("BigData/")
@@ -156,6 +159,16 @@ for numberCounter in range(Len_all_files):
     Angpi = AngpiCa()
     distance = Distance()
 
+    distance = Distance()
+    for i in range(EndDataEliminate):
+        distance.pop()
+
+
+    
+    for i in range(len(distance)//3):
+        sequence = distance[-5:-1]
+        MidSequence = (sum(sequence))/(len(sequence))
+        distance.append(MidSequence)
 
     SummidNumber = []
     dist = np.array(distance)

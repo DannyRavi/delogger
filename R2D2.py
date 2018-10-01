@@ -20,7 +20,10 @@ import numpy as np
     #        return dem
 
 buckets = []
-buckets = [0] * 100
+buckets = [1] * 10
+for i in range(len(buckets)//3):
+    b = 7
+    buckets.pop()
 print(buckets)
 
 

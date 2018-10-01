@@ -25,6 +25,7 @@ midNumber = []
 CreateZeroIndex = 170
 midNumber = [0] * CreateZeroIndex
 divide = 2
+EndDataEliminate = 35
 
 
 plt.close('all')
@@ -154,6 +155,15 @@ for numberCounter in range(Len_all_files):
     # Angpi = AngpiCa()
     
     distance = Distance()
+    for i in range(EndDataEliminate):
+        distance.pop()
+
+
+    
+    for i in range(len(distance)//3):
+        sequence = distance[-5:-1]
+        MidSequence = (sum(sequence))/(len(sequence))
+        distance.append(MidSequence)
 
 
     SummidNumber = []
