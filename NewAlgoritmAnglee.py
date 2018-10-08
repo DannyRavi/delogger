@@ -160,6 +160,7 @@ for numberCounter in range(Len_all_files):
     distance = Distance()
 
     distance = Distance()
+    EndDataEliminate = len(distance)//15
     for i in range(EndDataEliminate):
         distance.pop()
 

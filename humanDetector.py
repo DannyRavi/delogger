@@ -155,6 +155,7 @@ for numberCounter in range(Len_all_files):
     # Angpi = AngpiCa()
     
     distance = Distance()
+    EndDataEliminate = len(distance)//15
     for i in range(EndDataEliminate):
         distance.pop()
 
@@ -188,13 +189,17 @@ for numberCounter in range(Len_all_files):
     plt.title('output norm abs')
     fig.canvas.callbacks.connect('pick_event', on_pick)
 
-    plt.subplot(322)
+    plt.subplot(323)
+    plt.plot(dist, 'y-', linewidth=2, label='filtered data')
+    plt.title('Real output')
+
+    plt.subplot(325)
     sumFormatMath = np.array(SummidNumber)
     RefrenceCut = sumFormatMath.__gt__(Refrence_for_detect)
     plt.plot(RefrenceCut, 'b-', linewidth=2, label='filtered data')
     plt.title('output sum4norm aRefrenceCut')
 
-    plt.subplot(323)
+    plt.subplot(322)
     plt.plot(np.abs(IDXdim))
     plt.title('integral signal x')
     plt.xlabel('X')
@@ -204,14 +209,12 @@ for numberCounter in range(Len_all_files):
     plt.title('integral signal y')
     plt.xlabel('Y')
 
-    plt.subplot(325)
+    plt.subplot(326)
     plt.plot(np.abs(IDZdim))
     plt.title('integral signal z')
     plt.xlabel('Z')
 
-    plt.subplot(326)
-    plt.plot(dist, 'y-', linewidth=2, label='filtered data')
-    plt.title('Real output')
+
     
 
     mng = plt.get_current_fig_manager()

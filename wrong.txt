@@ -1,1 +1,36 @@
-28 Aug 2018 125749
+
+28 Aug 2018 131156.txt
+28 Aug 2018 131617.txt
+
+
+bug
+1 Amin 
+26 Aug 2018 2_13_05 .txt x continue
+26 Aug 2018 4_42_34 .txt
+26 Aug 2018 5_09_12 .txt mistake data
+not match
+26 Aug 2018 1_55_24 .txt
+
+
+2 Amin
+26 Aug 2018 5_14_29 .txt y continue
+27 Aug 2018 2_02_51 .txt x continue
+27 Aug 2018 2_03_44 .txt x continue
+27 Aug 2018 2_14_07 .txt x continue
+27 Aug 2018 2_14_58 .txt x continue
+27 Aug 2018 2_16_09 .txt x continue
+27 Aug 2018 2_25_46 .txt data bug
+27 Aug 2018 2_41_31 .txt x continue
+27 Aug 2018 2_52_37 .txt x continue
+27 Aug 2018 2_55_54 .txt x continue
+
+
+3 Amin
+27 Aug 2018 3_55_00 .txt x continue
+27 Aug 2018 4_01_25 .txt x continue
+27 Aug 2018 4_07_36 .txt algoritm define
+27 Aug 2018 4_09_56 .txt x continue
+27 Aug 2018 4_56_21 .txt algoritm define
+27 Aug 2018 5_14_29 .txt x continue
+27 Aug 2018 5_15_11 .txt x continue
+27 Aug 2018 5_18_48 .txt x continue
