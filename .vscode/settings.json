@@ -1,3 +1,14 @@
 {
-    "python.pythonPath": "C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python36-32\\python.exe"
+    "python.pythonPath": "C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python36-32\\python.exe",
+    "python.unitTest.unittestArgs": [
+        "-v",
+        "-s",
+        "./virtual_sample_presudocode",
+        "-p",
+        "*test.py"
+    ],
+    "python.unitTest.pyTestEnabled": false,
+    "python.unitTest.nosetestsEnabled": false,
+    "python.unitTest.unittestEnabled": false,
+    "python.unitTest.promptToConfigure": false
 }
