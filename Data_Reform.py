@@ -53,12 +53,12 @@ for numberCounter in range(Len_all_files):
     Xdim = list(map(int, Xdim))
     Ydim = list(map(int, Ydim))
     Zdim = list(map(int, Zdim))
-    Zdim = list(map(int, Zdim))
+    Irdim = list(map(int, Irdim))
     
 
     t = 0
     for i in range(len(Irdim)):
-      if(Irdim[i] != '0'):
+      if(Irdim[i]  > 2 ):
         t += 1
     if (t >= 1):
       lineError = len(Irdim) - t
@@ -120,15 +120,12 @@ for numberCounter in range(Len_all_files):
                  rangeForrirate)  # for ban out of index list
 
 
-
-
-
-
     name_file_execute = str(all_files[numberCounter])
     print(name_file_execute)
     counter += 1
     print(counter)
-
+    if (t >= 1):
+        print("***********************----*****************************" )
     grades = []
     TokenDim = []
     Xdim = []

@@ -34,3 +34,40 @@ not match
 27 Aug 2018 5_14_29 .txt x continue
 27 Aug 2018 5_15_11 .txt x continue
 27 Aug 2018 5_18_48 .txt x continue
+
+
+Danny
+Aug 25, 2018 105331.txt undefine bug
+Aug 25, 2018 105452.txt x continue
+Aug 25, 2018 105615.txt x continue
+Aug 25, 2018 105740.txt x continue
+Aug 25, 2018 105931.txt x continue
+Aug 25, 2018 112848.txt //
+Aug 25, 2018 112944.txt //
+Aug 25, 2018 113137.txt  //
+Aug 25, 2018 114802.txt //
+Aug 25, 2018 115244.txt algoritm define refrence
+Aug 25, 2018 115326.txt x continue
+Aug 25, 2018 121208.txt //
+Aug 25, 2018 122142.txt //
+Aug 25, 2018 122149.txt // sensor
+Aug 25, 2018 122302.txt // time least
+Aug 26, 2018 14907.txt  // sensor
+Aug 26, 2018 15035.txt  algoritm define refrence
+Aug 26, 2018 15430.txt  //sensor + algoritm define refrence
+Aug 26, 2018 15519.txt  //sensor
+Aug 26, 2018 15643.txt  //me
+Aug 26, 2018 15735.txt  //sensor
+Aug 26, 2018 20146.txt  //algoritm define refrence
+Aug 26, 2018 20322.txt  //me + time least
+Aug 26, 2018 21406.txt  //me + time least
+Aug 26, 2018 21458.txt  //me + time least
+Aug 26, 2018 40803.txt  //me + time least
+Aug 26, 2018 43844.txt  //me + time least
+Aug 27, 2018 20134.txt  //sensor
+Aug 27, 2018 20243.txt  //sensor
+Aug 27, 2018 20336.txt  //me + time least
+Aug 27, 2018 20501.txt  //sensor
+Aug 27, 2018 20814.txt  //me
+Aug 27, 2018 20844.txt  //algoritm define refrence
+Aug 27, 2018 20939.txt  //algoritm define refrence

@@ -155,7 +155,7 @@ for numberCounter in range(Len_all_files):
     # Angpi = AngpiCa()
     
     distance = Distance()
-    EndDataEliminate = len(distance)//15
+    EndDataEliminate = len(distance)//25
     for i in range(EndDataEliminate):
         distance.pop()
 
