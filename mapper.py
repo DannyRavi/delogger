@@ -9,16 +9,18 @@ Len_all_files = len(all_files)
 # a = "abc"
 # a, result = a[:-1], a[-1]
 data = []
+counter = 0
 title = ['number  ', 'name    ', 'act     ']
 data.append(title)
 for numberCounter in range(Len_all_files):
     Read_selected_files = all_files[numberCounter]
     Read_selected_files = str(Read_selected_files)
-
+    print(Read_selected_files)
     inputmapper = raw_input("insert your map ==>  ")
     inputmapper = str(inputmapper)
     counter += 1
     strCounter = str(counter)
+    print("counter =" ,counter)
 
     for i in range(4):
         Read_selected_files, result = Read_selected_files[:-1], Read_selected_files[-1]
@@ -39,7 +41,7 @@ for numberCounter in range(Len_all_files):
 #     writer.writeheader()
 #     writer.writerows(data)
 
-with open('hamid.csv', 'a') as csvFile:
+with open('Amin1.csv', 'a') as csvFile:
     writer = csv.writer(csvFile)
     writer.writerows(data)
 

@@ -21,8 +21,7 @@ distance = []
 results = []
 ReConstruct = []
 counter = 0
-divide = 20 #deymii
-
+divide = 1  # deymii
 
 
 eliminate_Item = '22222'  # '-5'#22222
@@ -30,7 +29,7 @@ plt.close('all')
 
 all_files = os.listdir("BigData/")
 Len_all_files = len(all_files)
-print ()
+print()
 
 for numberCounter in range(Len_all_files):
     Read_selected_files = all_files[numberCounter]
@@ -40,21 +39,18 @@ for numberCounter in range(Len_all_files):
         variable = f.readlines()
     # --------------------
 
-    
-
     for i in range(len(variable)):
         grades.append(variable[i].strip('\n'))
-        
+
     rangeForrirate = len(grades)
 
-        # for example 5
+    # for example 5
     # print(mini_size)
     for i in range(len(grades)):
         mini_size = len(grades[i].split(','))
         for ii in range(mini_size):
             sd = grades[i].split(',')
             ReConstruct.append(sd[ii])
-
 
     newgrades = list(filter(lambda x: x != eliminate_Item, grades))
     stepz = 5
@@ -64,11 +60,9 @@ for numberCounter in range(Len_all_files):
     Irdim = CreateDimen(3, ReConstruct, stepz)
     Tdim = CreateDimen(4, ReConstruct, stepz)
 
-
     Xdim = list(map(int, Xdim))
     Ydim = list(map(int, Ydim))
     Zdim = list(map(int, Zdim))
-
 
     # Irdim=CreateDimen(IrVector,newgrades,steps2)
     # Tdim=CreateDimen(tVector,newgrades,steps)
@@ -76,18 +70,15 @@ for numberCounter in range(Len_all_files):
 
     # ? CreateFile(Xdim,Ydim,Zdim,Tdim)
 
-
     Xdim = list(map(int, Xdim))
     Ydim = list(map(int, Ydim))
     Zdim = list(map(int, Zdim))
 
-
-        # Create real data
+    # Create real data
     Xdim = np.abs(Xdim)
     Ydim = np.abs(Ydim)
     Zdim = np.abs(Zdim)
     # Irdim= np.abs(Irdim)
-
 
     # Irdim= list(map(int, Irdim))
     splitX = list(split_by(Xdim, divide))
@@ -99,7 +90,6 @@ for numberCounter in range(Len_all_files):
     medianDownsampleZ = normalize(splitZ, divide)
     # Create real data
 
-
     FilterIDXdim = ReSample(medianDownsampleX, divide)
     FilterIDYdim = ReSample(medianDownsampleY, divide)
     FilterIDZdim = ReSample(medianDownsampleZ, divide)
@@ -108,52 +98,40 @@ for numberCounter in range(Len_all_files):
     Ydim = np.abs(FilterIDYdim)
     Zdim = np.abs(FilterIDZdim)
 
-
     # Irdim= np.abs(Irdim)
 
-    #deraivate of real data
+    # deraivate of real data
     DXdim = np.diff(Xdim)
     DYdim = np.diff(Ydim)
     DZdim = np.diff(Zdim)
 
     # ? XXdim = FilterAmplitude (DXdim,-2000,2000) #[i for i in DXdim if i <= 1000]
-    # ? YYdim = FilterAmplitude (DYdim,-2000,2000) #[i for i in DYdim if i <= 1000] # limit ovf 
+    # ? YYdim = FilterAmplitude (DYdim,-2000,2000) #[i for i in DYdim if i <= 1000] # limit ovf
     # ? ZZdim = FilterAmplitude (DZdim,-2000,2000) #[i for i in DZdim if i <= 1000]
 
-    XXdim1 = [i for i in DXdim if i <= 3000]
-    YYdim1 = [i for i in DYdim if i <= 3000]
-    ZZdim1 = [i for i in DZdim if i <= 3000]
+    XXdim1 = [i for i in DXdim if i <= 5000]
+    YYdim1 = [i for i in DYdim if i <= 5000]
+    ZZdim1 = [i for i in DZdim if i <= 5000]
 
-    XXdim = [i for i in XXdim1 if i >= -3000]
-    YYdim = [i for i in YYdim1 if i >= -3000]
-    ZZdim = [i for i in ZZdim1 if i >= -3000]
-    
+    XXdim = [i for i in XXdim1 if i >= -5000]
+    YYdim = [i for i in YYdim1 if i >= -5000]
+    ZZdim = [i for i in ZZdim1 if i >= -5000]
 
-    #Integral of Diff
+    # Integral of Diff
     IDXdim = Integ(XXdim)
     IDYdim = Integ(YYdim)
     IDZdim = Integ(ZZdim)
 
-
-
-   
-    ranges = min(len(IDXdim),len(IDYdim),len(IDZdim),rangeForrirate) # for ban out of index list
-
-
-
-
+    ranges = min(len(IDXdim), len(IDYdim), len(IDZdim),
+                 rangeForrirate)  # for ban out of index list
 
     # ? FilterIDXdim = filtering(4, 0.1, IDXdim).outy
     # ? FilterIDYdim = filtering(4, 0.1, IDYdim).outy
     # ? FilterIDZdim = filtering(4, 0.1, IDZdim).outy
 
-
     # print("b=",len(splitX))
 
-
     # print("Len=",len(medianDownsampleX),"medianDownsampleX=",medianDownsampleX,"medianDownsampleX[15]=",medianDownsampleX[5])
-
-
 
     # DXdim = np.diff(FilterIDXdim)
     # DYdim = np.diff(FilterIDYdim)
@@ -164,8 +142,7 @@ for numberCounter in range(Len_all_files):
     # IDYdim = Integ(DYdim)
     # IDZdim = Integ(DZdim)
 
-
-    p = Perceptron(3, np.array([0.2, 0.2, 0.2])) # [0.02, 0.02, 0.02]
+    p = Perceptron(3, np.array([0.2, 0.2, 0.2]))  # [0.02, 0.02, 0.02]
 
     # for absolute
     # absIDXdim=np.abs(IDXdim)
@@ -181,90 +158,50 @@ for numberCounter in range(Len_all_files):
     ArrayabsIDYdim = np.abs(IDYdim)
     ArrayabsIDZdim = np.abs(IDZdim)
 
-
     def Ann_Execute(r):
         p = r
         xxm = []
         OutY = []
         for x in range(ranges):
-            xxm.append([ArrayabsIDXdim[x], ArrayabsIDYdim[x], ArrayabsIDZdim[x]])
+            xxm.append(
+                [ArrayabsIDXdim[x], ArrayabsIDYdim[x], ArrayabsIDZdim[x]])
             y = p(xxm[x])
             OutY.append(y)
         return OutY
 
-
     Ann_Execute(p)
-
 
     def ShowMyAlgortim():
         plt.figure(1)
 
-        plt.subplot(411)
-        plt.plot(Xdim)
+        plt.subplot(311)
+        plt.plot(IDXdim)
         plt.title('Real signal')
 
-        plt.subplot(412)
-        plt.plot(XXdim)
-        plt.title('diff signal')
-
-        plt.subplot(413)
-        plt.plot((IDXdim))
-        plt.title('integral signal')
-
-        plt.subplot(414)
-        plt.plot(np.abs(IDXdim))
-        plt.title('abs signal')
-        plt.xlabel('X')
+        plt.ylabel('X')
 
         ax_name = str(all_files[numberCounter]) + 'X.png'
-        plt.savefig('axs/' + ax_name)
+
         # plt.show()
         # plt.close()
 
-        plt.figure(2)
+        plt.subplot(312)
 
-        plt.subplot(411)
-        plt.plot(Ydim)
-        plt.title('Real signal')
+        plt.plot(IDYdim)
 
-        plt.subplot(412)
-        plt.plot(YYdim)
-        plt.title('diff signal')
+        plt.ylabel('Y')
 
-        plt.subplot(413)
-        plt.plot((IDYdim))
-        plt.title('integral signal')
+        # ax_name = str(all_files[numberCounter]) + 'Y.png'
+        # plt.savefig('axs/' + ax_name)
 
-        plt.subplot(414)
-        plt.plot(np.abs(IDYdim))
-        plt.title('abs signal')
-        plt.xlabel('Y')
+        plt.subplot(313)
 
-        ax_name = str(all_files[numberCounter]) + 'Y.png'
+        plt.plot(IDZdim)
+
+        plt.ylabel('Z')
+
+        ax_name = str(all_files[numberCounter]) + 'n.png'
         plt.savefig('axs/' + ax_name)
-
-        plt.figure(3)
-
-        plt.subplot(411)
-        plt.plot(Zdim)
-        plt.title('Real signal')
-
-        plt.subplot(412)
-        plt.plot(ZZdim)
-        plt.title('diff signal')
-
-        plt.subplot(413)
-        plt.plot((IDZdim))
-        plt.title('integral signal')
-
-        plt.subplot(414)
-        plt.plot(np.abs(IDZdim))
-        plt.title('abs signal')
-        plt.xlabel('Z')
-
-        ax_name = str(all_files[numberCounter]) + 'Z.png'
-        plt.savefig('axs/' + ax_name)
-
 
         # plt.figure(4)
         # plt.subplot(111)
@@ -279,26 +216,8 @@ for numberCounter in range(Len_all_files):
         # plt.plot(Ann_Execute(p))
         # plt.title('ANN output')
 
-        plt.figure(4)
-        plt.subplot(411)
-        plt.plot(ArrayabsIDXdim, 'g-', linewidth=2, label='filtered data')
-        plt.title('X filtered')
-        plt.subplot(412)
-        plt.plot(ArrayabsIDYdim, 'g-', linewidth=2, label='filtered data')
-        plt.title('Y filtered')
-        plt.subplot(413)
-        plt.plot(ArrayabsIDZdim, 'g-', linewidth=2, label='filtered data')
-        plt.title('Z filtered')
-        plt.subplot(414)
-        plt.plot(Ann_Execute(p), 'r-', linewidth=2, label='ANN output')
-        plt.title('Ann Out')
-
-        ax_name = str(all_files[numberCounter]) + 'out.png'
-        plt.savefig('axs/' + ax_name)
-
         plt.show()
         plt.close('all')
-
 
     ShowMyAlgortim()
 
@@ -306,7 +225,6 @@ for numberCounter in range(Len_all_files):
     print(name_file_execute)
     counter += 1
     print(counter)
-
 
     grades = []
     TokenDim = []

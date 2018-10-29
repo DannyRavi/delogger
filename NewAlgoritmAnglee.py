@@ -291,8 +291,8 @@ for numberCounter in range(Len_all_files):
 
     # ! ax_name = str(all_files[numberCounter]) + 'out.png'
     # ! plt.savefig('axs/' + ax_name)
-    #! plt.show()       #! ################### for show graph ############################
-    #! plt.close('all') #! ################### for close graph ###########################
+    plt.show()       #! ################### for show graph ############################
+    plt.close('all') #! ################### for close graph ###########################
 
     algoritm_detect = []
     for i in range(len(sumFormatMath)):
