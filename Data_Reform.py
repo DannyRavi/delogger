@@ -29,6 +29,9 @@ for numberCounter in range(Len_all_files):
     with open('BigData/' + Read_selected_files, "r") as f:
         variable = f.readlines()
     # --------------------
+    name_file_execute = str(all_files[numberCounter])
+    print(name_file_execute,"before")
+
 
     for i in range(len(variable)):
         grades.append(variable[i].strip('\n'))
@@ -125,7 +128,7 @@ for numberCounter in range(Len_all_files):
     counter += 1
     print(counter)
     if (t >= 1):
-        print("***********************----*****************************" )
+        print("************************----*****************************" )
     grades = []
     TokenDim = []
     Xdim = []

@@ -170,6 +170,12 @@ def CreateFile_outputAloritm(inputData, nameOfFile):
     f.close()
 
 
+def CreateFile_Mapper(inputData, nameOfFile):
+    nameOfFile =  str (nameOfFile)
+    f = open('OutputAlgoritm/'+ nameOfFile, "w+")
+    f.write(str(inputData))
+    f.close()
+
 def CreateFlag(dataIn):
     togg1 = False 
     togg2 = True

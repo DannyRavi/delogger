@@ -20,11 +20,11 @@ distance = []
 results = []
 ReConstruct = []
 counter = 0
-Refrence_for_detect = 6
+Refrence_for_detect = 150
 midNumber = []
 CreateZeroIndex = 170
 midNumber = [0] * CreateZeroIndex
-divide = 2
+divide = 1
 EndDataEliminate = 35
 
 
@@ -155,17 +155,17 @@ for numberCounter in range(Len_all_files):
     # Angpi = AngpiCa()
     
     distance = Distance()
-    EndDataEliminate = len(distance)//25
+    EndDataEliminate = len(distance)//40
     for i in range(EndDataEliminate):
         distance.pop()
+ 
 
 
-    
     for i in range(len(distance)//3):
         sequence = distance[-5:-1]
         MidSequence = (sum(sequence))/(len(sequence))
         distance.append(MidSequence)
-
+  
 
     SummidNumber = []
     dist = np.array(distance)

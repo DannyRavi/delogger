@@ -71,3 +71,58 @@ Aug 27, 2018 20501.txt  //sensor
 Aug 27, 2018 20814.txt  //me
 Aug 27, 2018 20844.txt  //algoritm define refrence
 Aug 27, 2018 20939.txt  //algoritm define refrence
+
+
+
+
+Danny 2
+Aug 27, 2018 22335.txt  x continue
+Aug 27, 2018 24642.txt  //
+Aug 27, 2018 25039.txt  //
+Aug 27, 2018 25641.txt  //algoritm define refrence
+Aug 27, 2018 30052.txt  //algoritm define refrence
+Aug 27, 2018 34442.txt  //algoritm define refrence
+Aug 27, 2018 34632.txt  //sensor
+Aug 27, 2018 34736.txt  //x continue
+Aug 27, 2018 35217.txt  //sensor
+Aug 27, 2018 35330.txt  //continue
+Aug 27, 2018 35903.txt  //sensor + continue
+Aug 27, 2018 40013.txt  //sensor + continue
+Aug 27, 2018 40116.txt  //continue
+Aug 27, 2018 40214.txt  //sensor
+Aug 27, 2018 40341.txt  //continue
+Aug 27, 2018 40617.txt  //continue + refrence
+Aug 27, 2018 40727.txt  //continue
+Aug 27, 2018 40946.txt  //sensor
+Aug 27, 2018 42603.txt  //algoritm define refrence
+Aug 27, 2018 42635.txt  //algoritm define refrence
+Aug 27, 2018 42923.txt  //algoritm define refrence
+Aug 27, 2018 43057.txt  //algoritm define refrence
+Aug 27, 2018 43132.txt  //refrence
+Aug 27, 2018 45215.txt  //refrence
+Aug 27, 2018 45257.txt  //refrence
+Aug 27, 2018 50416.txt  //refrence
+Aug 27, 2018 51421.txt  //sensor
+Aug 28, 2018 11145.txt  //refrence
+Aug 28, 2018 11308.txt  //continue
+Aug 28, 2018 11410.txt  //continue
+Aug 28, 2018 11640.txt  //sensor
+
+
+
+Danny 3 
+
+Aug 28, 2018 114438.txt   //sensor + continue
+Aug 28, 2018 114517.txt   //continue
+Aug 28, 2018 115114.txt //sotty
+Aug 28, 2018 12058.txt  //sensor
+Aug 28, 2018 123704.txt //refrence
+Aug 28, 2018 12745.txt  //sensor
+Aug 28, 2018 13426.txt  //continue
+
+QMC Danny
+Oct 28, 2018 32648.txt  //continue >
+Oct 28, 2018 33129.txt  //continue
+Oct 28, 2018 35156.txt  //need to profiles
+we have a errore that called hang
+we must know which file ralate to profile

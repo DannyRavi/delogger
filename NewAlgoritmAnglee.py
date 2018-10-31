@@ -19,7 +19,7 @@ results = []
 ReConstruct = []
 counter = 0
 divide = 2
-Refrence_for_detect = 6
+Refrence_for_detect = 115
 midNumber = []
 CreateZeroIndex = 170
 midNumber = [0] * CreateZeroIndex
@@ -160,16 +160,16 @@ for numberCounter in range(Len_all_files):
     distance = Distance()
 
     distance = Distance()
-    EndDataEliminate = len(distance)//15
-    for i in range(EndDataEliminate):
-        distance.pop()
+    #? EndDataEliminate = len(distance)//25
+    #? for i in range(EndDataEliminate):
+    #?     distance.pop()
 
 
     
-    for i in range(len(distance)//3):
-        sequence = distance[-5:-1]
-        MidSequence = (sum(sequence))/(len(sequence))
-        distance.append(MidSequence)
+    #? for i in range(len(distance)//3):
+    #?     sequence = distance[-5:-1]
+    #?     MidSequence = (sum(sequence))/(len(sequence))
+    #?     distance.append(MidSequence)
 
     SummidNumber = []
     dist = np.array(distance)

@@ -31,8 +31,27 @@
 #!    if stackCount == 10:
 #!        stackCount = 0
 
-import csv
 
+#! import os
+#! import shutil
+#! src = 'E:/Danny/Ground Sensor/Delogger/delogger/BigData/'
+#! dest = 'E:/Danny/Ground Sensor/Delogger/delogger/OutputAlgoritm'
+#! src_files = os.listdir(src)
+#! 
+#! for file_name in src_files:
+#!     full_file_name = os.path.join(src, file_name)
+#!     new_file_name = "uu "+file_name
+#!     if (os.path.isfile(full_file_name)):
+#!         shutil.copy2(full_file_name, dest)
+#!         dst_file = os.path.join(dest, full_file_name)
+#!         new_dst_file_name = os.path.join(dest, new_file_name)
+#!         os.rename(dst_file, new_dst_file_name)
+#! 
+
+
+
+# In Windows
+# os.system('copy instructable.txt dd2.txt')
 # with open('names.csv', 'w', newline='') as csvfile:
 #     fieldnames = ['first_name', 'last_name']
 #     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
@@ -52,7 +71,6 @@ import csv
 # csvFile.close()
 
 
-import csv
 
 # csvData = [['Person', 'Age'], ['Peter', '22'], ['Jasmine', '21'], ['Sam', '24']]
 
@@ -62,17 +80,17 @@ import csv
 
 # csvFile.close()
 
-a = "ss"
-data = [{'mountain': a , 'height': '8848'},
-        {'mountain': 'K2 ', 'height': '8611'},
-        {'mountain': 'Kanchenjunga', 'height': '8586'}]
-print(data[0])
-with open('person.csv', 'w') as csvFile:
-    fields = ['mountain', 'height']
-    writer = csv.DictWriter(csvFile, fieldnames=fields)
-    writer.writeheader()
-    writer.writerows(data)
+# a = "ss"
+# data = [{'mountain': a , 'height': '8848'},
+#         {'mountain': 'K2 ', 'height': '8611'},
+#         {'mountain': 'Kanchenjunga', 'height': '8586'}]
+# print(data[0])
+# with open('person.csv', 'w') as csvFile:
+#     fields = ['mountain', 'height']
+#     writer = csv.DictWriter(csvFile, fieldnames=fields)
+#     writer.writeheader()
+#     writer.writerows(data)
 
-print("writing completed")
+# print("writing completed")
 
-csvFile.close()
+# csvFile.close()
