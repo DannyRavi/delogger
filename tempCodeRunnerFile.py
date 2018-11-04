@@ -1,1 +1,1 @@
-inputmapper
+raw_input

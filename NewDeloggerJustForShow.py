@@ -16,12 +16,15 @@ Xdim = []
 Ydim = []
 Zdim = []
 Tdim = []
+Xdim1 = []
+Ydim1 = []
+Zdim1 = []
 Angpi = []
 distance = []
 results = []
 ReConstruct = []
 counter = 0
-divide = 20  # deymii
+divide = 25  # deymii
 
 
 eliminate_Item = '22222'  # '-5'#22222
@@ -94,12 +97,27 @@ for numberCounter in range(Len_all_files):
     FilterIDYdim = ReSample(medianDownsampleY, divide)
     FilterIDZdim = ReSample(medianDownsampleZ, divide)
 
-    Xdim = np.abs(FilterIDXdim)
-    Ydim = np.abs(FilterIDYdim)
-    Zdim = np.abs(FilterIDZdim)
+    # FilterIDXdim[:-150]
+    # FilterIDYdim[:-150]
+    # FilterIDZdim[:-150]
 
+    
+    #! Xdim = np.abs(FilterIDXdim)
+    #! Ydim = np.abs(FilterIDYdim)
+    #! Zdim = np.abs(FilterIDZdim)
+
+    Xdim =  np.abs(FilterIDXdim [:-100])
+    Ydim =  np.abs(FilterIDYdim [:-100])
+    Zdim =  np.abs(FilterIDZdim [:-100])
     # Irdim= np.abs(Irdim)
 
+    # Xdim[:-1000]
+    # Ydim[:-1000]
+    # Zdim[:-1000]
+        
+        #Xdim = np.delete(Xdim, [-1])
+        #Ydim = np.delete(Ydim, [-1])
+        #Zdim = np.delete(Zdim, [-1])
     # deraivate of real data
     DXdim = np.diff(Xdim)
     DYdim = np.diff(Ydim)
@@ -226,7 +244,7 @@ for numberCounter in range(Len_all_files):
         mng.resize(*mng.window.maxsize())
         ax_name = str(all_files[numberCounter]) + '.png'
         plt.savefig('axs/' + ax_name)
-        #!plt.show()
+        plt.show()
         plt.close('all')
 
     ShowMyAlgortim()
@@ -241,6 +259,9 @@ for numberCounter in range(Len_all_files):
     Xdim = []
     Ydim = []
     Zdim = []
+    Xdim1 = []
+    Ydim1 = []
+    Zdim1 = []
     Tdim = []
     Angpi = []
     distance = []

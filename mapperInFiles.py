@@ -8,9 +8,9 @@ for numberCounter in range(Len_all_files):
     Read_selected_files = all_files[numberCounter]
     Read_selected_files = str(Read_selected_files)
 
-    print(Read_selected_files)
+    print("=============================================>",Read_selected_files)
     
-    inputmapper = raw_input("insert your map ==>  ")
+    inputmapper = raw_input("insert your map =========================================>  ")
     inputmapper = inputmapper.replace('\r', '')
     inputmapper = inputmapper + " "
     # inputmapper = str(inputmapper)
@@ -23,6 +23,6 @@ for numberCounter in range(Len_all_files):
     print(src)
 
     new_name = 'OutputAlgoritm/' + inputmapper + Read_selected_files 
-    print("print(new_name)",new_name)
+    print("(OLD)--->",new_name)
     os.rename(src, new_name)
 

@@ -160,6 +160,7 @@ for numberCounter in range(Len_all_files):
     distance = Distance()
 
     distance = Distance()
+    '''if you press on logger button sooner than nessecery so you shoud add blue code under this line'''
     #? EndDataEliminate = len(distance)//25
     #? for i in range(EndDataEliminate):
     #?     distance.pop()
