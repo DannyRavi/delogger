@@ -1,4 +1,7 @@
+from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
+from sklearn import datasets
+import pandas as pd
 import numpy as np
 from ForDebudLibrary import *
 from numpy import *
@@ -18,13 +21,13 @@ distance = []
 results = []
 ReConstruct = []
 counter = 0
-divide = 2
+divide = 10
 Refrence_for_detect = 115
 midNumber = []
-CreateZeroIndex = 170
+CreateZeroIndex = 10
 midNumber = [0] * CreateZeroIndex
 EndDataEliminate = 35
-
+dataCollcet = []
 
 plt.close('all')
 
@@ -87,9 +90,9 @@ for numberCounter in range(Len_all_files):
     FilterIDYdim = ReSample(medianDownsampleY, divide)
     FilterIDZdim = ReSample(medianDownsampleZ, divide)
 
-    Xdim = np.abs(FilterIDXdim)
-    Ydim = np.abs(FilterIDYdim)
-    Zdim = np.abs(FilterIDZdim)
+    Xdim =  np.abs(FilterIDXdim [:-90])
+    Ydim =  np.abs(FilterIDYdim [:-90])
+    Zdim =  np.abs(FilterIDZdim [:-90])
 
     # Irdim= np.abs(Irdim)
 
@@ -159,7 +162,7 @@ for numberCounter in range(Len_all_files):
     Angpi = AngpiCa()
     distance = Distance()
 
-    
+    distance = Distance()
     '''if you press on logger button sooner than nessecery so you shoud add blue code under this line'''
     #? EndDataEliminate = len(distance)//25
     #? for i in range(EndDataEliminate):
@@ -167,10 +170,10 @@ for numberCounter in range(Len_all_files):
 
 
     
-    for i in range(len(distance)//3):
-        sequence = distance[-5:-1]
-        MidSequence = (sum(sequence))/(len(sequence))
-        distance.append(MidSequence)
+    #? for i in range(len(distance)//3):
+    #?     sequence = distance[-5:-1]
+    #?     MidSequence = (sum(sequence))/(len(sequence))
+    #?     distance.append(MidSequence)
 
     SummidNumber = []
     dist = np.array(distance)
@@ -195,105 +198,28 @@ for numberCounter in range(Len_all_files):
     # vr = y.__gt__(12);
     # print(vr)
 
-    plt.figure(1)
 
-    plt.subplot(411)
-    plt.plot(Xdim)
-    plt.title('Real signal')
-
-    plt.subplot(412)
-    plt.plot(XXdim)
-    plt.title('diff signal')
-
-    plt.subplot(413)
-    plt.plot((IDXdim))
-    plt.title('integral signal')
-
-    plt.subplot(414)
-    plt.plot(np.abs(IDXdim))
-    plt.title('abs signal')
-    plt.xlabel('X')
     # plt.show()
     # plt.close()
     # ! ax_name = str(all_files[numberCounter]) + 'X.png'
     # ! plt.savefig('axs/' + ax_name)
 
-    plt.figure(2)
-
-    plt.subplot(411)
-    plt.plot(Ydim)
-    plt.title('Real signal')
-
-    plt.subplot(412)
-    plt.plot(YYdim)
-    plt.title('diff signal')
-
-    plt.subplot(413)
-    plt.plot((IDYdim))
-    plt.title('integral signal')
-
-    plt.subplot(414)
-    plt.plot(np.abs(IDYdim))
-    plt.title('abs signal')
-    plt.xlabel('Y')
 
     # ! ax_name = str(all_files[numberCounter]) + 'Y.png'
     # ! plt.savefig('axs/' + ax_name)
 
-    plt.figure(3)
-
-    plt.subplot(411)
-    plt.plot(Zdim)
-    plt.title('Real signal')
-
-    plt.subplot(412)
-    plt.plot(ZZdim)
-    plt.title('diff signal')
-
-    plt.subplot(413)
-    plt.plot((IDZdim))
-    plt.title('integral signal')
-
-    plt.subplot(414)
-    plt.plot(np.abs(IDZdim))
-    plt.title('abs signal')
-    plt.xlabel('Z')
 
     # ! ax_name = str(all_files[numberCounter]) + 'Z.png'
     # ! plt.savefig('axs/' + ax_name)
 
-    plt.figure(4)
 
-    plt.subplot(511)
-    plt.plot(Angpi)
-    plt.title('Angle')
-
-    plt.subplot(512)
-    dist = np.array(distance)
-    plt.plot(dist)
-    plt.title('distance')
-
-    plt.subplot(513)
-    y = dist.__gt__(Refrence_for_detect)
-    plt.plot(y, 'y-', linewidth=2, label='filtered data')
-    plt.title('output norm abs')
-
-
-    plt.subplot(514)
-    sumFormatMath = np.array(SummidNumber)
-    RefrenceCut = sumFormatMath.__gt__(Refrence_for_detect)
-    plt.plot(RefrenceCut, 'b-', linewidth=2, label='filtered data')
-    plt.title('output sum4norm aRefrenceCut')
-    
-    plt.subplot(515)
-    sumFormatMath = np.array(SummidNumber)
-    plt.plot(sumFormatMath, 'b-', linewidth=2, label='filtered data')
-    plt.title('sumFormatMath')
 
     # ! ax_name = str(all_files[numberCounter]) + 'out.png'
     # ! plt.savefig('axs/' + ax_name)
-    plt.show()       #! ################### for show graph ############################
+    #plt.show()       #! ################### for show graph ############################
     plt.close('all') #! ################### for close graph ###########################
+
+    sumFormatMath = np.array(SummidNumber)
 
     algoritm_detect = []
     for i in range(len(sumFormatMath)):
@@ -303,13 +229,17 @@ for numberCounter in range(Len_all_files):
             algoritm_detect.append(0)
 
     name_file_execute = str(all_files[numberCounter])
-
-    CreateFile_outputAloritm(algoritm_detect, name_file_execute)
+    maxOfDataABs =sumFormatMath.max(axis=0)
+    if (maxOfDataABs>1500.0):
+        dataCollcet.append(1000.0)
+    else:
+        dataCollcet.append(maxOfDataABs)
 
     print(name_file_execute)
     counter += 1
     print(counter)
-
+    
+    
     grades = []
     TokenDim = []
     Xdim = []
@@ -324,3 +254,44 @@ for numberCounter in range(Len_all_files):
     midNumber = []
     midNumber = [0] * CreateZeroIndex
 
+sd = sum (dataCollcet)/(len(dataCollcet))
+print("============>",sd)
+print (dataCollcet)
+
+name_file_execute = "regData"
+CreateFile_outputAloritm(dataCollcet, name_file_execute)
+x = np.arange(1,len(dataCollcet)+1)
+y = np.array(dataCollcet)
+colors = y
+plt.scatter(x,y, c = colors)
+plt.ylabel('amp')
+plt.xlabel('number of data')
+
+
+plt.show()
+
+#! x = x.reshape(-1,1)
+#! y = y.reshape(-1,1)
+#! 
+#! 
+#! reg = LinearRegression()
+#! reg.fit(x,y)
+#! yhat = reg.predict(x)
+#! 
+
+#! plt.scatter(x,y,'r-')
+#! plt.ylabel('amp')
+#! plt.xlabel('number of data')
+#! plt.plot(x,yhat, 'y-')
+#! plt.show()
+
+
+
+# x = x.reshape(-1,1)
+# y = y.reshape(-1,1)
+# reg = LinearRegression()
+# reg.fit(x,y)
+# yhat = reg.predict(x)
+# plt.scatter(x,y)
+# plt.plot(x,yhat)
+# plt.show()

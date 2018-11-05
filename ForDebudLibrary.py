@@ -78,7 +78,10 @@ def split_by(sequence, length):
 
     def yield_length():
         for i in range(length):
-            yield iterable.next()
+            try:
+                yield iterable.__next__()
+            except StopIteration:
+                return    
     while True:
         res = list(yield_length())
         if not res:
