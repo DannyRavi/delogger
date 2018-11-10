@@ -94,3 +94,41 @@
 # print("writing completed")
 
 # csvFile.close()
+import matplotlib.pyplot as plt  
+# matplotlib inline
+import numpy as np  
+from sklearn.cluster import KMeans  
+
+X = np.array([[5,3],  
+     [10,15],
+     [15,12],
+     [24,10],
+     [30,45],
+     [85,70],
+     [71,80],
+     [60,78],
+     [55,52],
+     [80,91],])
+
+YY = []
+Y = range(len(X))
+for i in Y:
+  YY.append(i)
+
+print(X)  
+print("X") 
+print(type(X))
+print(YY) 
+# plt.scatter(X[:,0],X[:,1], label='True Position')  
+kmeans = KMeans(n_clusters=2)  
+kmeans.fit(X) 
+print(kmeans.cluster_centers_)  
+print(kmeans.labels_)  
+# plt.scatter(YY,X[:,1], c=kmeans.labels_, cmap='rainbow')  
+# plt.show()
+
+print("***")
+Tx = np.arange(0, 10)
+Tx[:5]=0
+Tx[5:]=1
+print (Tx)

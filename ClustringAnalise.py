@@ -15,6 +15,7 @@ import pandas as pd
 import seaborn as sb
 from sklearn.cluster import DBSCAN
 from sklearn.cluster import KMeans
+from sklearn.preprocessing import Imputer
 
 grades = []
 grades2 = []
@@ -85,13 +86,24 @@ Ey = np.array(Fnumber)
 
 Fx = np.arange(1, len(Enumber)+1)
 Fy = np.array(Enumber)
-Fy = Fy[0:len(Ey)]
-print(Fy)
+
+# Tx = Fy * Ey
+Ty = np.concatenate((Ey, Fy), axis=0)
+# Ty = sort(Ty)
+E_edge = len(Ey)
+Tx = np.arange(0, len(Ty))
+Tx[:]=0
+# Tx[E_edge:]=1
+# Tx = Tx[0:len(Ty)]
+# print(Fy)
 # a = pd.DataFrame({ 'group' :"Full", 'value': Fx })
 # b = pd.DataFrame({ 'group' :"Empty", 'value': Fy })
-myData = { 'Empty': Ey, 'Full': Fy }
+#! myData = { 'Empty': Ey, 'Full': Fy }
+myData = { 'number': Tx  , 'alld': Ty  }
 df = pd.DataFrame.from_dict(myData, orient='index')
 df = df.transpose()
+# df = df.fillna(0)
+
 # a = {'Links' : lines ,'Titles' : titles , 'Singers': finalsingers , 'Albums':finalalbums , 'Years' : years}
 # df = pd.DataFrame.from_dict(a, orient='index')
 # df.transpose()
@@ -118,16 +130,22 @@ print(df)
 # plt.show()
 # print(df.group)
 # print(df.group)
-# Fx = Fx.reshape(-1,1)
-# Fy = Fy.reshape(-1,1)
-kmn = KMeans(n_clusters=3)
+# Tx = Tx.reshape(-1,1)
+# Ty = Ty.reshape(-1,1)
+kmn = KMeans(n_clusters=2)
 kmn.fit(df)
 labels = kmn.predict(df)
-xs = df.Empty
-ys = df.Full
-
+xs = df.number
+ys = df.alld
+print("#############")
+print(len(xs))
+print(len(ys))
+# xs = df.Empy
+# ys = df.Full
+# xs = df.Full
 centroids = kmn.cluster_centers_
-plt.scatter( xs, ys, c=labels)
+# plt.scatter(xs, ys,  c=labels)
+plt.scatter(xs,ys, c=kmn.labels_, cmap='rainbow')  
 # plt.scatter(centroids[:,0],centroids[:,2],marker='x',s=150,alpha=0.5)
 plt.show()
 
@@ -149,7 +167,7 @@ plt.show()
 #! C_y = np.random.randint(0, np.max(X)-20, size=k)
 #! C = np.array(list(zip(C_x, C_y)), dtype=np.float32)
 
-# Plotting along with the Centroids
+# Plotting along with  Centroids
 #!plt.scatter(f1, f2, c='#050505', s=7)
 #!plt.scatter(C_x, C_y, marker='*', s=200, c='g')
 #!
