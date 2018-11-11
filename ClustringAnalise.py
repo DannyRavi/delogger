@@ -146,6 +146,7 @@ print(len(ys))
 centroids = kmn.cluster_centers_
 # plt.scatter(xs, ys,  c=labels)
 plt.scatter(xs,ys, c=kmn.labels_, cmap='rainbow')  
+plt.scatter(centroids[:,0],centroids[:,1],marker='x',s=150,alpha=0.5)
 # plt.scatter(centroids[:,0],centroids[:,2],marker='x',s=150,alpha=0.5)
 plt.show()
 

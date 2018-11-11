@@ -14,8 +14,7 @@ from sklearn import datasets
 import pandas as pd
 import seaborn as sb
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.linear_model import LinearRegression
-from sklearn.model_selection import train_test_split
+
 
 
 
@@ -142,6 +141,7 @@ xs = df.alld
 xs= np.array(df.iloc[:, 1:2]) 	# end index is exclusive
 ys= np.array(df.iloc[:, 0:1]) 
 
+knn = KNeighborsClassifier(n_neighbors=6, metric='minkowski',p=2)
 #todo from sklearn import svm
 #todo clf = svm.SVC(kernel='linear', C = 1.0)
 #todo clf.fit(xs,ys)
@@ -155,9 +155,9 @@ ys= np.array(df.iloc[:, 0:1])
 # ys.array.reshape(1, -1)
 
 
+knn.fit(xs, ys.ravel())
 
-
-
+print(knn.predict(0.58))
 dummy_data = (np.arange(60.0))
 # start = 0
 # stop  = 50
@@ -166,31 +166,13 @@ dummy_data = (np.arange(60.0))
 # num = int((stop-start)/(incr-eps)+1)
 # dummy_data = np.linspace(start, stop,num)
 
-
 print(dummy_data)
 dummy_data = dummy_data.reshape(-1,1)
 dummy_data = dummy_data
-
-#! x_train, x_test ,y_train, y_test= train_test_split(xs, ys, test_size = 200, random_state=42)
-#! # ─── SD ───────────
-#! reg = LinearRegression()
-#! reg.fit(x_train, y_train)
-#! y_pred = reg.predict(x_test)
-#! plt.scatter(x_test, y_pred)
-#! plt.plot()
-#! plt.show()
-#! ─── SD ───────────
-
-
-# ─── DD ──────────────────────────────────
-reg = LinearRegression()
-reg.fit(xs,ys)
-yhat = reg.predict(dummy_data)
-plt.scatter(xs,ys)
-plt.plot(dummy_data,yhat)
+final = knn.predict(dummy_data)
+xA = (np.arange(80.0))
+plt.plot(final)
 plt.show()
-# ─── DD ──────────────────────────────────
-
 # xs = df.Empy
 # ys = df.Full
 # xs = df.Full

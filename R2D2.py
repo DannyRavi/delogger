@@ -94,41 +94,108 @@
 # print("writing completed")
 
 # csvFile.close()
-import matplotlib.pyplot as plt  
-# matplotlib inline
-import numpy as np  
-from sklearn.cluster import KMeans  
+## todo import matplotlib.pyplot as plt  
+## todo # matplotlib inline
+## todo import numpy as np  
+## todo from sklearn.cluster import KMeans  
+## todo 
+## todo X = np.array([[5,3],  
+## todo      [10,15],
+## todo      [15,12],
+## todo      [24,10],
+## todo      [30,45],
+## todo      [85,70],
+## todo      [71,80],
+## todo      [60,78],
+## todo      [55,52],
+## todo      [80,91],])
+## todo 
+## todo YY = []
+## todo Y = range(len(X))
+## todo for i in Y:
+## todo   YY.append(i)
+## todo 
+## todo print(X)  
+## todo print("X") 
+## todo print(type(X))
+## todo print(YY) 
+## todo # plt.scatter(X[:,0],X[:,1], label='True Position')  
+## todo kmeans = KMeans(n_clusters=2)  
+## todo kmeans.fit(X) 
+## todo print(kmeans.cluster_centers_)  
+## todo print(kmeans.labels_)  
+## todo # plt.scatter(YY,X[:,1], c=kmeans.labels_, cmap='rainbow')  
+## todo # plt.show()
+## todo 
+## todo print("***")
+## todo Tx = np.arange(0, 10)
+## todo Tx[:5]=0
+## todo Tx[5:]=1
+## todo print (Tx)
 
-X = np.array([[5,3],  
-     [10,15],
-     [15,12],
-     [24,10],
-     [30,45],
-     [85,70],
-     [71,80],
-     [60,78],
-     [55,52],
-     [80,91],])
 
-YY = []
-Y = range(len(X))
-for i in Y:
-  YY.append(i)
+#? from sklearn.cluster import MeanShift
+#? import matplotlib.pyplot as plt  
+#? # matplotlib inline
+#? import numpy as np  
+#? from sklearn.datasets import load_iris
+#? iris = load_iris()
+#? 
+#? x = iris.data
+#? ms = MeanShift()
+#? ms.fit(x)
+#? labels = ms.labels_
+#? cluster_center = ms.cluster_centers_
+#? n_cluster = len(np.unique(labels))
+#? print('Number of estimated cluster:' ,n_cluster)
+#? plt.scatter(x[:,0], x[:,1], c=labels)
+#? plt.scatter(cluster_center[:,0], cluster_center[:,1], marker='x', s=150, linewidth=5 )
+#? plt.show()
 
-print(X)  
-print("X") 
-print(type(X))
-print(YY) 
-# plt.scatter(X[:,0],X[:,1], label='True Position')  
-kmeans = KMeans(n_clusters=2)  
-kmeans.fit(X) 
-print(kmeans.cluster_centers_)  
-print(kmeans.labels_)  
-# plt.scatter(YY,X[:,1], c=kmeans.labels_, cmap='rainbow')  
-# plt.show()
 
-print("***")
-Tx = np.arange(0, 10)
-Tx[:5]=0
-Tx[5:]=1
-print (Tx)
+# X = [[0], [1], [2], [3]]
+# y = [0, 0, 1, 1]
+# from sklearn.neighbors import KNeighborsClassifier
+# neigh = KNeighborsClassifier(n_neighbors=3)
+# neigh.fit(X, y) 
+
+# print(neigh.predict([[1.1]]))
+
+# print(neigh.predict([[0.9]]))
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib import style
+
+style.use("ggplot")
+from sklearn import svm
+
+x = [1, 5, 1.5, 8, 1, 9]
+y = [2, 8, 1.8, 8, 0.6, 11]
+
+plt.scatter(x,y)
+plt.show()
+
+X = np.array([[1,2],
+             [5,8],
+             [1.5,1.8],
+             [8,8],
+             [1,0.6],
+             [9,11]])
+
+y = [0,1,0,1,0,1]
+
+clf = svm.SVC(kernel='linear', C = 1.0)
+clf.fit(X,y)
+
+test = np.array([0.58, 0.76])
+print (test)       # Produces: [ 0.58  0.76]
+print (test.shape) # Produces: (2,) meaning 2 rows, 1 col
+
+test = test.reshape(1, -1)
+print (test)      # Produces: [[ 0.58  0.76]]
+print (test.shape) # Produces (1, 2) meaning 1 row, 2 cols
+
+print(clf.predict(test)) # Produces [0], as expected
+

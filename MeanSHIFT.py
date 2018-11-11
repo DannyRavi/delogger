@@ -13,11 +13,10 @@ import matplotlib.pyplot as plt
 from sklearn import datasets
 import pandas as pd
 import seaborn as sb
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.linear_model import LinearRegression
-from sklearn.model_selection import train_test_split
-
-
+from sklearn.cluster import DBSCAN
+from sklearn.cluster import KMeans
+from sklearn.cluster import MeanShift
+from sklearn import cluster
 
 grades = []
 grades2 = []
@@ -94,9 +93,8 @@ Ty = np.concatenate((Ey, Fy), axis=0)
 # Ty = sort(Ty)
 E_edge = len(Ey)
 Tx = np.arange(0, len(Ty))
-# Tx[:]=0
-Tx[:E_edge]=0
-Tx[E_edge:]=1
+Tx[:]=0
+# Tx[E_edge:]=1
 # Tx = Tx[0:len(Ty)]
 # print(Fy)
 # a = pd.DataFrame({ 'group' :"Full", 'value': Fx })
@@ -137,73 +135,22 @@ print(df)
 # Ty = Ty.reshape(-1,1)
 
 
-ys = df.number
-xs = df.alld
-xs= np.array(df.iloc[:, 1:2]) 	# end index is exclusive
-ys= np.array(df.iloc[:, 0:1]) 
+ms = MeanShift(bandwidth = 15)
+ms.fit(df)
+labels = ms.labels_
+# ms.bandwidth
+cluster_center = ms.cluster_centers_
+xs = df.number
+ys = df.alld
 
-#todo from sklearn import svm
-#todo clf = svm.SVC(kernel='linear', C = 1.0)
-#todo clf.fit(xs,ys)
-#todo test = np.array([0.58])
-#todo test = test.reshape(1, -1)
-# print(clf.predict(test)) 
-# df = pd.DataFrame(list(df.all()))
-# ys = df.iloc[-1:]     
-# ys = ys.values.reshape(1,-1)  # sliced it here
-# xs.array.reshape(1, -1)
-# ys.array.reshape(1, -1)
-
-
-
-
-
-dummy_data = (np.arange(60.0))
-# start = 0
-# stop  = 50
-# incr = 0.5
-# eps = 1e-3*(stop-start)
-# num = int((stop-start)/(incr-eps)+1)
-# dummy_data = np.linspace(start, stop,num)
-
-
-print(dummy_data)
-dummy_data = dummy_data.reshape(-1,1)
-dummy_data = dummy_data
-
-#! x_train, x_test ,y_train, y_test= train_test_split(xs, ys, test_size = 200, random_state=42)
-#! # ─── SD ───────────
-#! reg = LinearRegression()
-#! reg.fit(x_train, y_train)
-#! y_pred = reg.predict(x_test)
-#! plt.scatter(x_test, y_pred)
-#! plt.plot()
-#! plt.show()
-#! ─── SD ───────────
-
-
-# ─── DD ──────────────────────────────────
-reg = LinearRegression()
-reg.fit(xs,ys)
-yhat = reg.predict(dummy_data)
-plt.scatter(xs,ys)
-plt.plot(dummy_data,yhat)
+# centroids = ms.centroids
+# banwidth = cluster.estimate_bandwidth(df,quantile=0.3,n_jobs=-1)
+# ms = cluster.MeanShift(bandwidth=banwidth,bin_seeding=False,n_jobs=-1)
+n_cluster = len(np.unique(labels))
+print('Number of estimated cluster:' ,n_cluster)
+plt.scatter(xs, ys, c=labels )
+# plt.scatter(cluster_center[:,0], cluster_center[:,1], marker='x', s=150, linewidth=5)
 plt.show()
-# ─── DD ──────────────────────────────────
-
-# xs = df.Empy
-# ys = df.Full
-# xs = df.Full
-
-# plt.scatter(xs, ys,  c=labels)
-# plt.scatter(xs,ys,  cmap='rainbow')  
-# plt.scatter(centroids[:,0],centroids[:,1],marker='x',s=150,alpha=0.5)
-# plt.scatter(centroids[:,0],centroids[:,2],marker='x',s=150,alpha=0.5)
-# plt.show()
-
-
-
-
 
 #! f2 = df['Empty'].values
 #! f1 = df['Full'].values
