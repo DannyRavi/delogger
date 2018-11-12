@@ -135,7 +135,7 @@ print(df)
 # Ty = Ty.reshape(-1,1)
 
 
-ms = MeanShift(bandwidth = 15)
+ms = MeanShift(bandwidth = 2)
 ms.fit(df)
 labels = ms.labels_
 # ms.bandwidth

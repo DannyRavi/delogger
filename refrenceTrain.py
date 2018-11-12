@@ -82,26 +82,74 @@ for numberCounter in range(Len_all_files):
     algoritm_detect = []
 
 
-Fx = np.arange(1, len(Fnumber)+1)
+Fx = np.arange(0, len(Fnumber))
 Fy = np.array(Fnumber)
 
-Ex = np.arange(1, len(Enumber)+1)
+Ex = np.arange(0, len(Enumber))
 Ey = np.array(Enumber)
 
 
-a = pd.DataFrame({ 'group' :"Full", 'value': Fx })
-b = pd.DataFrame({ 'group' :"Empty", 'value': Fy })
+Ty = np.concatenate((Ey, Fy), axis=0)
+# Ty = sort(Ty)
+E_edge = len(Ey)
+Tx = np.arange(0, len(Ty))
+# Tx[:]=0
+Tx[:E_edge] = 1
+Tx[E_edge:] = 0
+# Tx = Tx[0:len(Ty)]
+# print(Fy)
+# a = pd.DataFrame({ 'group' :"Full", 'value': Fx })
+# b = pd.DataFrame({ 'group' :"Empty", 'value': Fy })
+#! myData = { 'Empty': Ey, 'Full': Fy }
+myData = {'state': Tx, 'value': Ty}
+df = pd.DataFrame.from_dict(myData, orient='index')
+df = df.transpose()
 
-df=a.append(b)
- 
 # Usual boxplot
-ax = sb.boxplot(x='group', y='value', data=df)
+ax = sb.boxplot(x='state', y='value', data=df)
 
 
-ax = sb.stripplot(x='group', y='value', data=df, color="red", jitter=0.2, size=2.5)
+ax = sb.stripplot(x='state', y='value', data=df,
+                  color="red", jitter=0.2, size=2.5)
 
 plt.title("Boxplot with jitter", loc="left")
 
 # sb.distplot(Fy)
 
-plt.show()
+# plt.show()
+states = df.state
+values = df.value
+
+
+reng_of_train = 50
+
+
+DefineNewState = []
+stackPrecent = []
+stackRefrence = []
+Q3Empty = 83
+Q1Full = 226
+
+
+# [x * 0.1 for x in range(0, 10)]
+for ref in range(Q3Empty,Q1Full):
+  Nref = ref * 0.1
+  for i in range(len(states)):
+      if (values[i] >= Nref):
+          DefineNewState.append(1)
+      else:
+          DefineNewState.append(0)
+  stackPrecent.append(matchFunc(states, DefineNewState))
+  stackRefrence.append(ref)
+  DefineNewState = []
+
+
+AllData = {'refrence': stackRefrence, 'precent': stackPrecent}
+dfAllData = pd.DataFrame.from_dict(AllData, orient='index')
+dfAllData = dfAllData.transpose()
+
+
+print(dfAllData)
+maxAllData = max(stackPrecent)
+indexOfAlldata = stackPrecent.index(maxAllData)
+print(dfAllData.loc[indexOfAlldata] )

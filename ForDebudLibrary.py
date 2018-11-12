@@ -197,3 +197,14 @@ def Comrator2data(In1,In2):
         print ("    NOT Match")
         Number = 1
     return  Number  
+
+
+def matchFunc(refData,otherData):
+  stackData = []
+  for i in range(len(refData)):
+    if(refData[i]==otherData[i]):
+      stackData.append(1)
+    else:
+      stackData.append(0)
+  final =  ((sum(stackData))/len(refData)) *100
+  return final   
