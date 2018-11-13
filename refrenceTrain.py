@@ -127,8 +127,8 @@ reng_of_train = 50
 DefineNewState = []
 stackPrecent = []
 stackRefrence = []
-Q3Empty = 83
-Q1Full = 226
+Q3Empty = 0 # for lower case
+Q1Full = 400 # for upper case
 
 
 # [x * 0.1 for x in range(0, 10)]
@@ -147,7 +147,7 @@ for ref in range(Q3Empty,Q1Full):
 AllData = {'refrence': stackRefrence, 'precent': stackPrecent}
 dfAllData = pd.DataFrame.from_dict(AllData, orient='index')
 dfAllData = dfAllData.transpose()
-
+dfAllData.to_csv('dfAllData.csv')
 
 print(dfAllData)
 maxAllData = max(stackPrecent)

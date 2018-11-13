@@ -148,6 +148,9 @@ centroids = kmn.cluster_centers_
 plt.scatter(xs,ys, c=kmn.labels_, cmap='rainbow')  
 plt.scatter(centroids[:,0],centroids[:,1],marker='x',s=150,alpha=0.5)
 # plt.scatter(centroids[:,0],centroids[:,2],marker='x',s=150,alpha=0.5)
+plt.title("K means Algorithm")
+plt.ylabel("data")
+plt.plot(final)
 plt.show()
 
 #! f2 = df['Empty'].values

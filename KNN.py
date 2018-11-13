@@ -158,19 +158,22 @@ knn = KNeighborsClassifier(n_neighbors=6, metric='minkowski',p=2)
 knn.fit(xs, ys.ravel())
 
 print(knn.predict(0.58))
-# dummy_data = (np.arange(60.0)) # for low reselotion
-start = 0
-stop  = 50
-incr = 0.1
-eps = 1e-4*(stop-start)
-num = int((stop-start)/(incr-eps)+1)
-dummy_data = np.linspace(start, stop,num)
+dummy_data = (np.arange(60.0)) # for low reselotion
+# start = 0
+# stop  = 50
+# incr = 0.1
+# eps = 1e-4*(stop-start)
+# num = int((stop-start)/(incr-eps)+1)
+# dummy_data = np.linspace(start, stop,num)
 
-print(dummy_data)
+# print(dummy_data)
 dummy_data = dummy_data.reshape(-1,1)
 dummy_data = dummy_data
 final = knn.predict(dummy_data)
 xA = (np.arange(80.0))
+plt.title("KNN Algorithm")
+plt.xlabel("data")
+plt.ylabel("State")
 plt.plot(final)
 plt.show()
 # xs = df.Empy
