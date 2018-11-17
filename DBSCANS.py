@@ -94,8 +94,9 @@ Ty = np.concatenate((Ey, Fy), axis=0)
 E_edge = len(Ey)
 Tx = np.arange(0, len(Ty))
 # Tx[:]=0
-Tx[:E_edge]=0
-Tx[E_edge:]=1
+Tx[:]=0
+#! Tx[:E_edge]=0
+#! Tx[E_edge:]=1
 # Tx = Tx[0:len(Ty)]
 # print(Fy)
 # a = pd.DataFrame({ 'group' :"Full", 'value': Fx })
@@ -134,7 +135,7 @@ print(df)
 # print(df.group)
 # Tx = Tx.reshape(-1,1)
 # Ty = Ty.reshape(-1,1)
-dbscan = DBSCAN(algorithm='auto', eps=1.2,  metric='euclidean',metric_params=None, min_samples=3, n_jobs=None, p=None)
+dbscan = DBSCAN(algorithm='auto', eps=0.8,  metric='euclidean',metric_params=None, min_samples=2, n_jobs=None, p=None)
 dbscan.fit(df)
 labels = dbscan.labels_
 xs = df.number
@@ -142,6 +143,8 @@ ys = df.alld
 print("#############")
 print(len(xs))
 print(len(ys))
+
+
 # xs = df.Empy
 # ys = df.Full
 # xs = df.Full
@@ -150,6 +153,10 @@ print(len(ys))
 plt.scatter(xs,ys, c=labels, cmap='rainbow')  
 # plt.scatter(centroids[:,0],centroids[:,1],marker='x',s=150,alpha=0.5)
 # plt.scatter(centroids[:,0],centroids[:,2],marker='x',s=150,alpha=0.5)
+plt.title("DBSCAN Algorithm")
+plt.ylabel("data")
+# plt.ylabel("State")
+
 plt.show()
 
 

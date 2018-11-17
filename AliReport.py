@@ -1,6 +1,9 @@
+from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
+from sklearn import datasets
+import pandas as pd
 import numpy as np
-from dimes import *
+from ForDebudLibrary import *
 from numpy import *
 from scipy import integrate
 from numpy import linalg as LA
@@ -19,11 +22,17 @@ results = []
 ReConstruct = []
 counter = 0
 divide = 10
-Refrence_for_detect = 14
+Refrence_for_detect = 14 #!
 midNumber = []
 CreateZeroIndex = 170
 midNumber = [0] * CreateZeroIndex
 EndDataEliminate = 35
+dataCollcet = []
+Data_FE_toDataset = []
+REAl_Data_FE_toDataset = []
+StoreDataName = []
+
+dataPOP = -90
 
 
 plt.close('all')
@@ -87,9 +96,9 @@ for numberCounter in range(Len_all_files):
     FilterIDYdim = ReSample(medianDownsampleY, divide)
     FilterIDZdim = ReSample(medianDownsampleZ, divide)
 
-    Xdim = np.abs(FilterIDXdim)
-    Ydim = np.abs(FilterIDYdim)
-    Zdim = np.abs(FilterIDZdim)
+    Xdim =  np.abs(FilterIDXdim [:dataPOP])
+    Ydim =  np.abs(FilterIDYdim [:dataPOP])
+    Zdim =  np.abs(FilterIDZdim [:dataPOP])
 
     # Irdim= np.abs(Irdim)
 
@@ -161,19 +170,22 @@ for numberCounter in range(Len_all_files):
 
     
     '''if you press on logger button sooner than nessecery so you shoud add blue code under this line'''
-    #? EndDataEliminate = len(distance)//25
-    #? for i in range(EndDataEliminate):
-    #?     distance.pop()
+    # --- BLUE CODE ----------------------------
 
 
-    
+    # EndDataEliminate = len(distance)//25
+    # for i in range(EndDataEliminate):
+    #     distance.pop()
+
+
+  
     for i in range(len(distance)//3):
         sequence = distance[-5:-1]
         MidSequence = (sum(sequence))/(len(sequence))
         distance.append(MidSequence)
+    # --- BLUE CODE ----------------------------
 
-# QUEUE FIFO
-
+   # --- QUEUE -----------------------------
 
     SummidNumber = []
     dist = np.array(distance)
@@ -185,8 +197,8 @@ for numberCounter in range(Len_all_files):
         SummidNumber.append(sumdiv)
         if stackCount == len(midNumber):
             stackCount = 0
-# QUEUE
 
+   # --- QUEUE -----------------------------------------
 
     # print("Angpi=")
     # print(Angpi)
@@ -198,105 +210,30 @@ for numberCounter in range(Len_all_files):
     # vr = y.__gt__(12);
     # print(vr)
 
-    plt.figure(1)
 
-    plt.subplot(411)
-    plt.plot(Xdim)
-    plt.title('Real signal')
-
-    plt.subplot(412)
-    plt.plot(XXdim)
-    plt.title('diff signal')
-
-    plt.subplot(413)
-    plt.plot((IDXdim))
-    plt.title('integral signal')
-
-    plt.subplot(414)
-    plt.plot(np.abs(IDXdim))
-    plt.title('abs signal')
-    plt.xlabel('X')
     # plt.show()
     # plt.close()
     # ! ax_name = str(all_files[numberCounter]) + 'X.png'
     # ! plt.savefig('axs/' + ax_name)
 
-    plt.figure(2)
-
-    plt.subplot(411)
-    plt.plot(Ydim)
-    plt.title('Real signal')
-
-    plt.subplot(412)
-    plt.plot(YYdim)
-    plt.title('diff signal')
-
-    plt.subplot(413)
-    plt.plot((IDYdim))
-    plt.title('integral signal')
-
-    plt.subplot(414)
-    plt.plot(np.abs(IDYdim))
-    plt.title('abs signal')
-    plt.xlabel('Y')
 
     # ! ax_name = str(all_files[numberCounter]) + 'Y.png'
     # ! plt.savefig('axs/' + ax_name)
 
-    plt.figure(3)
-
-    plt.subplot(411)
-    plt.plot(Zdim)
-    plt.title('Real signal')
-
-    plt.subplot(412)
-    plt.plot(ZZdim)
-    plt.title('diff signal')
-
-    plt.subplot(413)
-    plt.plot((IDZdim))
-    plt.title('integral signal')
-
-    plt.subplot(414)
-    plt.plot(np.abs(IDZdim))
-    plt.title('abs signal')
-    plt.xlabel('Z')
 
     # ! ax_name = str(all_files[numberCounter]) + 'Z.png'
     # ! plt.savefig('axs/' + ax_name)
 
-    plt.figure(4)
 
-    plt.subplot(511)
-    plt.plot(Angpi)
-    plt.title('Angle')
-
-    plt.subplot(512)
-    dist = np.array(distance)
-    plt.plot(dist)
-    plt.title('distance')
-
-    plt.subplot(513)
-    y = dist.__gt__(Refrence_for_detect)
-    plt.plot(y, 'y-', linewidth=2, label='filtered data')
-    plt.title('output norm abs')
-
-
-    plt.subplot(514)
-    sumFormatMath = np.array(SummidNumber)
-    RefrenceCut = sumFormatMath.__gt__(Refrence_for_detect)
-    plt.plot(RefrenceCut, 'b-', linewidth=2, label='filtered data')
-    plt.title('output sum4norm aRefrenceCut')
-    
-    plt.subplot(515)
-    sumFormatMath = np.array(SummidNumber)
-    plt.plot(sumFormatMath, 'b-', linewidth=2, label='filtered data')
-    plt.title('sumFormatMath')
 
     # ! ax_name = str(all_files[numberCounter]) + 'out.png'
     # ! plt.savefig('axs/' + ax_name)
-    plt.show()       #! ################### for show graph ############################
+    #plt.show()       #! ################### for show graph ############################
     plt.close('all') #! ################### for close graph ###########################
+
+    sumFormatMath = np.array(SummidNumber)
+    # --- ALGORITM DETECT ---------------------------
+
 
     algoritm_detect = []
     for i in range(len(sumFormatMath)):
@@ -305,14 +242,44 @@ for numberCounter in range(Len_all_files):
         else:
             algoritm_detect.append(0)
 
-    name_file_execute = str(all_files[numberCounter])
+    # --- ALGORITM DETECT ---------------------------
+    
 
-    CreateFile_outputAloritm(algoritm_detect, name_file_execute)
+
+#?##########################
+    #Data_FE_toDataset.append(CreateFlag(algoritm_detect))
+    # print(Data_FE_toDataset)
+    retunNONItreableEorF = CreateFlag(algoritm_detect)
+    # for i in range(len(Data_FE_toDataset)):
+    LenForSelected_retunNONItreableEorF = len(retunNONItreableEorF)
+    #     print("ssd=>",LenForSelected_Data_FE_toDataset)
+    if(LenForSelected_retunNONItreableEorF > 3):
+        giveIt = TheLastDataOut(retunNONItreableEorF)
+        retunNONItreableEorF_2 = CreateFlag(giveIt)
+        REAl_Data_FE_toDataset.append(retunNONItreableEorF_2)
+    else:
+        giveIt = retunNONItreableEorF
+        REAl_Data_FE_toDataset.append(giveIt)
+
+
+    name_file_execute = str(all_files[numberCounter])
+    maxOfDataABs =sumFormatMath.max(axis=0)
+
+    # --- DATALIMIT amplitude----------------------
+
+
+    if (maxOfDataABs>1500.0):
+        dataCollcet.append(1000.0)
+    else:
+        dataCollcet.append(maxOfDataABs)
+    # --- DATALIMIT ----------------------
 
     print(name_file_execute)
+    StoreDataName.append(name_file_execute[0:2]) # to create A1  B3 ...
     counter += 1
     print(counter)
-
+    
+    
     grades = []
     TokenDim = []
     Xdim = []
@@ -327,3 +294,61 @@ for numberCounter in range(Len_all_files):
     midNumber = []
     midNumber = [0] * CreateZeroIndex
 
+sd = sum (dataCollcet)/(len(dataCollcet))
+print("============>",sd)
+# print (dataCollcet)
+
+# --- LASTOFDETECT -----------------------------------------------------
+
+
+
+
+
+# --------------------------------------------------------------------------------
+
+
+
+name_file_execute2 = "DataM"
+CreateFile_outputAloritm(dataCollcet, name_file_execute2)
+x = np.arange(1,len(dataCollcet)+1)
+y = np.array(dataCollcet)
+colors = y
+plt.scatter(x,y, c = colors)
+plt.ylabel('amp')
+plt.xlabel('number of data')
+
+
+# --- DATASET --------------------------------------
+myData = { 'profile': StoreDataName  , 'states': REAl_Data_FE_toDataset  }
+df = pd.DataFrame.from_dict(myData, orient='index')
+df = df.transpose()
+df.to_csv('refrenceOUT.csv')
+# --- DATASET --------------------------------------
+print(df)
+plt.show()
+
+#! x = x.reshape(-1,1)
+#! y = y.reshape(-1,1)
+#! 
+#! 
+#! reg = LinearRegression()
+#! reg.fit(x,y)
+#! yhat = reg.predict(x)
+#! 
+
+#! plt.scatter(x,y,'r-')
+#! plt.ylabel('amp')
+#! plt.xlabel('number of data')
+#! plt.plot(x,yhat, 'y-')
+#! plt.show()
+
+
+
+# x = x.reshape(-1,1)
+# y = y.reshape(-1,1)
+# reg = LinearRegression()
+# reg.fit(x,y)
+# yhat = reg.predict(x)
+# plt.scatter(x,y)
+# plt.plot(x,yhat)
+# plt.show()

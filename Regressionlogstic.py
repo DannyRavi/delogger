@@ -159,18 +159,17 @@ ys= np.array(df.iloc[:, 0:1])
 
 
 
-# dummy_data = (np.arange(60.0))
-start = 0
-stop  = 50
-incr = 0.5
-eps = 1e-4*(stop-start)
-num = int((stop-start)/(incr-eps)+1)
-dummy_data = np.linspace(start, stop,num)
+dummy_data = (np.arange(60.0))
+# start = 0
+# stop  = 50
+# incr = 0.5
+# eps = 1e-4*(stop-start)
+# num = int((stop-start)/(incr-eps)+1)
+# dummy_data = np.linspace(start, stop,num)
 
 
 # print(dummy_data)
 dummy_data = dummy_data.reshape(-1,1)
-dummy_data = dummy_data
 
 #! x_train, x_test ,y_train, y_test= train_test_split(xs, ys, test_size = 200, random_state=42)
 #! # ─── SD ───────────
@@ -196,8 +195,16 @@ dummy_data = dummy_data
 # Fit the classifier
 
 # X, y = load_iris(return_X_y=True)
-clf = LogisticRegression(random_state=0, solver='lbfgs',multi_class='multinomial').fit(xs, ys)
+clf = LogisticRegression().fit(xs, ys)
 yhat = clf.predict(dummy_data)
+
+
+# ──────────────────────────────────────
+
+# loss = model(dummy_data * clf.coef_ + clf.intercept_).ravel()
+# plt.plot(dummy_data, loss, color='red', linewidth=3)
+# ──────────────────────────────────────
+
 plt.scatter(xs,ys)
 ess = clf.predict_proba(dummy_data) 
 plt.plot(dummy_data,yhat)
@@ -206,6 +213,7 @@ plt.xlabel("data")
 plt.ylabel("State")
 plt.show()
 lin = clf.score(xs, ys)
+
 # print("es",ess)
 print("refLine",lin )
 # plt.plot(xx,xs)
